@@ -4,6 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>TRIVOX AI IMPACT</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
 
   <style>
     *{
@@ -231,13 +234,13 @@
     }
 
     .hero{
-      min-height:100vh;
+      min-height:72vh;
       position:relative;
       overflow:hidden;
       display:flex;
       align-items:center;
       justify-content:center;
-      padding:120px 24px 70px;
+      padding:96px 24px 44px;
       background:
         linear-gradient(
           180deg,
@@ -440,8 +443,8 @@
       }
 
       .hero{
-        min-height:100svh;
-        padding:110px 20px 65px;
+        min-height:68svh;
+        padding:92px 20px 42px;
       }
 
       .hero-title{
@@ -458,6 +461,11 @@
     }
 
     @media(max-width:600px){
+
+      .hero{
+        min-height:64svh;
+        padding:84px 16px 34px;
+      }
 
       .navbar{
         padding:0 14px;
@@ -497,15 +505,15 @@
       position:relative;
       width:100%;
       overflow:hidden;
-      padding:72px 0 84px;
-      background:#070707;
+      padding:36px 0 44px;
+      background:#ffffff;
     }
 
     .showcase-head{
       width:min(1180px,92%);
-      margin:0 auto 38px;
+      margin:0 auto 28px;
       text-align:center;
-      color:#fff;
+      color:#111116;
     }
 
     .showcase-head p{
@@ -556,7 +564,7 @@
       flex:0 0 340px;
       overflow:hidden;
       border-radius:16px;
-      background:#181818;
+      background:#f4f4f6;
       box-shadow:0 12px 38px rgba(0,0,0,.22);
     }
 
@@ -606,7 +614,7 @@
 
     @media(max-width:900px){
       .showcase{
-        padding:58px 0 68px;
+        padding:42px 0 50px;
       }
 
       .showcase-head{
@@ -678,7 +686,475 @@
       }
     }
 
-  </style>
+  
+    /* =========================================================
+       HERO FA ICONS — RISE FROM TEXT + FALL BACK TO TEXT
+    ========================================================= */
+
+    .hero-icon-field{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:min(980px,92vw);
+      height:330px;
+      transform:translate(-50%,-48%);
+      z-index:2;
+      pointer-events:none;
+      overflow:visible;
+    }
+
+    .hero-fa{
+      position:absolute;
+      left:var(--x);
+      top:62%;
+      font-size:var(--size);
+      color:rgba(116,80,232,.28);
+      opacity:0;
+      transform:translate(-50%,0) scale(.72) rotate(0deg);
+      animation:textIconLift var(--duration) cubic-bezier(.45,0,.25,1) var(--delay) infinite;
+      will-change:transform,opacity;
+    }
+
+    .hero-fa:nth-child(3n){
+      color:rgba(49,95,204,.24);
+    }
+
+    .hero-fa:nth-child(4n){
+      color:rgba(20,20,26,.17);
+    }
+
+    @keyframes textIconLift{
+      0%{
+        opacity:0;
+        transform:
+          translate(-50%,18px)
+          scale(.65)
+          rotate(-5deg);
+      }
+
+      10%{
+        opacity:.2;
+      }
+
+      22%{
+        opacity:.62;
+        transform:
+          translate(calc(-50% + var(--drift-small)),-34px)
+          scale(.88)
+          rotate(3deg);
+      }
+
+      48%{
+        opacity:.72;
+        transform:
+          translate(calc(-50% + var(--drift)),-135px)
+          scale(1)
+          rotate(9deg);
+      }
+
+      58%{
+        opacity:.68;
+        transform:
+          translate(calc(-50% + var(--drift)), -150px)
+          scale(1.02)
+          rotate(11deg);
+      }
+
+      76%{
+        opacity:.52;
+        transform:
+          translate(calc(-50% + var(--drift-small)),-58px)
+          scale(.92)
+          rotate(4deg);
+      }
+
+      92%{
+        opacity:.22;
+        transform:
+          translate(-50%,2px)
+          scale(.75)
+          rotate(0deg);
+      }
+
+      100%{
+        opacity:0;
+        transform:
+          translate(-50%,18px)
+          scale(.65)
+          rotate(-4deg);
+      }
+    }
+
+    @media(max-width:1000px){
+      .hero-icon-field{
+        width:92vw;
+        height:280px;
+        transform:translate(-50%,-45%);
+      }
+
+      .hero-fa{
+        top:64%;
+        font-size:calc(var(--size) * .86);
+      }
+    }
+
+    @media(max-width:600px){
+      .hero-icon-field{
+        width:94vw;
+        height:240px;
+        transform:translate(-50%,-42%);
+      }
+
+      .hero-fa{
+        top:66%;
+        font-size:calc(var(--size) * .72);
+      }
+
+      .hero-fa:nth-child(n+11){
+        display:none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .hero-fa{
+        animation:none;
+        opacity:.14;
+      }
+    }
+
+  
+    /* ===== FIXED TEXT-ORIGIN ICON ANIMATION ===== */
+    .hero-content{
+      position:relative;
+      isolation:isolate;
+    }
+
+    .hero-title,
+    .hero-description,
+    .hero-actions{
+      position:relative;
+      z-index:3;
+    }
+
+    .text-icon-layer{
+      position:absolute;
+      left:50%;
+      top:50%;
+      width:min(900px, 92vw);
+      height:260px;
+      transform:translate(-50%,-62%);
+      z-index:1;
+      pointer-events:none;
+      overflow:visible;
+    }
+
+    .text-fall-icon{
+      position:absolute;
+      left:var(--x);
+      bottom:18px;
+      font-size:var(--s);
+      color:rgba(116,80,232,.34);
+      opacity:0;
+      transform:translate(-50%,0) scale(.75);
+      animation:riseFromText var(--t) ease-in-out var(--d) infinite;
+      will-change:transform,opacity;
+    }
+
+    .text-fall-icon:nth-child(3n){
+      color:rgba(49,95,204,.28);
+    }
+
+    .text-fall-icon:nth-child(4n){
+      color:rgba(20,20,26,.20);
+    }
+
+    @keyframes riseFromText{
+      0%{
+        opacity:0;
+        transform:translate(-50%, 18px) scale(.7) rotate(-5deg);
+      }
+      15%{
+        opacity:.7;
+      }
+      45%{
+        opacity:.75;
+        transform:translate(calc(-50% + var(--dx)), -145px) scale(1) rotate(9deg);
+      }
+      55%{
+        opacity:.75;
+        transform:translate(calc(-50% + var(--dx)), -155px) scale(1.02) rotate(11deg);
+      }
+      82%{
+        opacity:.48;
+        transform:translate(calc(-50% + var(--dx2)), -45px) scale(.9) rotate(3deg);
+      }
+      100%{
+        opacity:0;
+        transform:translate(-50%, 18px) scale(.72) rotate(-4deg);
+      }
+    }
+
+    @media(max-width:1000px){
+      .text-icon-layer{
+        width:94vw;
+        height:220px;
+        transform:translate(-50%,-58%);
+      }
+      .text-fall-icon{
+        font-size:calc(var(--s) * .84);
+      }
+    }
+
+    @media(max-width:600px){
+      .text-icon-layer{
+        width:96vw;
+        height:190px;
+        transform:translate(-50%,-55%);
+      }
+      .text-fall-icon{
+        font-size:calc(var(--s) * .72);
+      }
+      .text-fall-icon:nth-child(n+10){
+        display:none;
+      }
+    }
+
+  
+    /* FINAL RELIABLE ICON MOTION */
+    .text-icon-layer{
+      position:absolute !important;
+      left:50% !important;
+      top:46% !important;
+      width:min(920px,92vw) !important;
+      height:240px !important;
+      transform:translate(-50%,-50%) !important;
+      z-index:2 !important;
+      pointer-events:none !important;
+      overflow:visible !important;
+    }
+
+    .text-fall-icon{
+      position:absolute !important;
+      left:var(--x) !important;
+      bottom:10px !important;
+      display:block !important;
+      font-size:var(--s) !important;
+      color:rgba(116,80,232,.42) !important;
+      opacity:0;
+      animation:trivoxIconBounce var(--t) ease-in-out var(--d) infinite !important;
+      will-change:transform,opacity;
+    }
+
+    @keyframes trivoxIconBounce{
+      0%{
+        opacity:0;
+        transform:translate(-50%, 18px) scale(.75);
+      }
+      18%{
+        opacity:.8;
+      }
+      50%{
+        opacity:.95;
+        transform:translate(calc(-50% + var(--dx)), -135px) scale(1.05);
+      }
+      72%{
+        opacity:.65;
+        transform:translate(calc(-50% + var(--dx2)), -62px) scale(.94);
+      }
+      100%{
+        opacity:0;
+        transform:translate(-50%, 18px) scale(.75);
+      }
+    }
+
+    @media(max-width:600px){
+      .text-icon-layer{
+        top:44% !important;
+        height:190px !important;
+      }
+
+      .text-fall-icon{
+        font-size:calc(var(--s) * .72) !important;
+      }
+    }
+
+
+    /* ===== BIG SIDE ICONS: BOTTOM -> UP/OUT -> FALL DOWN ===== */
+    .text-icon-layer{
+      position:absolute !important;
+      left:50% !important;
+      top:50% !important;
+      width:min(1120px, 98vw) !important;
+      height:360px !important;
+      transform:translate(-50%,-42%) !important;
+      z-index:2 !important;
+      overflow:visible !important;
+      pointer-events:none !important;
+    }
+
+    .text-fall-icon{
+      position:absolute !important;
+      left:50% !important;
+      bottom:0 !important;
+      display:block !important;
+      font-size:var(--big) !important;
+      color:rgba(116,80,232,.38) !important;
+      opacity:0;
+      filter:none !important;
+      animation:bigSideRiseFall var(--speed) cubic-bezier(.42,0,.28,1) var(--wait) infinite !important;
+      will-change:transform,opacity;
+    }
+
+    @keyframes bigSideRiseFall{
+      0%{
+        opacity:0;
+        transform:
+          translate(-50%,55px)
+          scale(.62)
+          rotate(0deg);
+      }
+
+      12%{
+        opacity:.72;
+      }
+
+      48%{
+        opacity:.92;
+        transform:
+          translate(
+            calc(-50% + var(--side)),
+            var(--up)
+          )
+          scale(1)
+          rotate(var(--rot));
+      }
+
+      62%{
+        opacity:.9;
+        transform:
+          translate(
+            calc(-50% + var(--side)),
+            calc(var(--up) - 12px)
+          )
+          scale(1.04)
+          rotate(var(--rot));
+      }
+
+      82%{
+        opacity:.62;
+        transform:
+          translate(
+            calc(-50% + (var(--side) * .45)),
+            -70px
+          )
+          scale(.86)
+          rotate(2deg);
+      }
+
+      100%{
+        opacity:0;
+        transform:
+          translate(-50%,55px)
+          scale(.62)
+          rotate(0deg);
+      }
+    }
+
+    @media(max-width:1000px){
+      .text-icon-layer{
+        width:100vw !important;
+        height:300px !important;
+        transform:translate(-50%,-38%) !important;
+      }
+
+      .text-fall-icon{
+        font-size:calc(var(--big) * .78) !important;
+      }
+    }
+
+    @media(max-width:600px){
+      .text-icon-layer{
+        width:100vw !important;
+        height:250px !important;
+        top:49% !important;
+        transform:translate(-50%,-34%) !important;
+      }
+
+      .text-fall-icon{
+        font-size:calc(var(--big) * .58) !important;
+      }
+
+      .text-fall-icon:nth-child(n+8){
+        display:none !important;
+      }
+    }
+
+
+    /* ===== FINAL STATIC SIDE ICON POSITIONS ===== */
+    .text-icon-layer{
+      position:absolute !important;
+      left:50% !important;
+      top:50% !important;
+      width:min(1120px, 98vw) !important;
+      height:360px !important;
+      transform:translate(-50%,-42%) !important;
+      z-index:2 !important;
+      pointer-events:none !important;
+      overflow:visible !important;
+    }
+
+    .text-fall-icon{
+      position:absolute !important;
+      display:block !important;
+      animation:none !important;
+      opacity:.34 !important;
+      color:rgba(116,80,232,.34) !important;
+      transform:none !important;
+      filter:none !important;
+      font-size:var(--big) !important;
+      left:var(--left) !important;
+      top:var(--top) !important;
+    }
+
+    .text-fall-icon:nth-child(3n){
+      color:rgba(49,95,204,.27) !important;
+    }
+
+    .text-fall-icon:nth-child(4n){
+      color:rgba(20,20,26,.18) !important;
+    }
+
+    @media(max-width:1000px){
+      .text-icon-layer{
+        width:100vw !important;
+        height:300px !important;
+        transform:translate(-50%,-38%) !important;
+      }
+
+      .text-fall-icon{
+        font-size:calc(var(--big) * .76) !important;
+      }
+    }
+
+    @media(max-width:600px){
+      .text-icon-layer{
+        width:100vw !important;
+        height:240px !important;
+        top:49% !important;
+        transform:translate(-50%,-34%) !important;
+      }
+
+      .text-fall-icon{
+        font-size:calc(var(--big) * .56) !important;
+        opacity:.26 !important;
+      }
+
+      .text-fall-icon:nth-child(n+8){
+        display:none !important;
+      }
+    }
+
+</style>
 </head>
 
 <body>
@@ -862,6 +1338,20 @@
 <section class="hero">
 
   <div class="hero-content">
+
+    <div class="text-icon-layer" aria-hidden="true">
+      <i class="fa-solid fa-code text-fall-icon" style="--big:54px;--left:7%;--top:58%;"></i>
+      <i class="fa-solid fa-laptop-code text-fall-icon" style="--big:62px;--left:15%;--top:20%;"></i>
+      <i class="fa-solid fa-brain text-fall-icon" style="--big:58px;--left:26%;--top:8%;"></i>
+      <i class="fa-solid fa-microchip text-fall-icon" style="--big:50px;--left:35%;--top:70%;"></i>
+      <i class="fa-solid fa-robot text-fall-icon" style="--big:66px;--left:60%;--top:7%;"></i>
+      <i class="fa-solid fa-lightbulb text-fall-icon" style="--big:55px;--left:70%;--top:65%;"></i>
+      <i class="fa-solid fa-gears text-fall-icon" style="--big:60px;--left:79%;--top:18%;"></i>
+      <i class="fa-solid fa-database text-fall-icon" style="--big:52px;--left:90%;--top:58%;"></i>
+      <i class="fa-solid fa-cloud text-fall-icon" style="--big:58px;--left:4%;--top:12%;"></i>
+      <i class="fa-solid fa-terminal text-fall-icon" style="--big:53px;--left:88%;--top:5%;"></i>
+    </div>
+
 
     <h1 class="hero-title">
 

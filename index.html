@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TRIVOX AI IMPACT</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:Arial, Helvetica, sans-serif;
+      background:#fff;
+      color:#111;
+      overflow-x:hidden;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .navbar{
+      width:100%;
+      height:76px;
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:9999;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 4%;
+      background:rgba(255,255,255,.86);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-bottom:1px solid rgba(0,0,0,.06);
+    }
+
+    .logo{
+      display:flex;
+      align-items:center;
+      white-space:nowrap;
+      font-size:23px;
+      font-weight:900;
+      letter-spacing:-1px;
+    }
+
+    .logo-main{
+      background:linear-gradient(
+        to bottom,
+        #111 0%,
+        #111 50%,
+        #7450e8 50%,
+        #7450e8 100%
+      );
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .logo-impact{
+      margin-left:7px;
+      background:linear-gradient(
+        to bottom,
+        #7450e8 0%,
+        #7450e8 50%,
+        #222 50%,
+        #222 100%
+      );
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .nav-menu{
+      display:flex;
+      align-items:center;
+      gap:3px;
+      list-style:none;
+    }
+
+    .nav-item{
+      position:relative;
+    }
+
+    .nav-link{
+      padding:28px 10px;
+      display:flex;
+      align-items:center;
+      gap:6px;
+      font-size:13.5px;
+      font-weight:600;
+      color:#37373d;
+      cursor:pointer;
+      white-space:nowrap;
+      transition:.2s;
+    }
+
+    .nav-link:hover{
+      color:#7450e8;
+    }
+
+    .arrow{
+      width:6px;
+      height:6px;
+      border-right:1.5px solid currentColor;
+      border-bottom:1.5px solid currentColor;
+      transform:rotate(45deg) translateY(-2px);
+      transition:.2s;
+    }
+
+    .nav-item:hover .arrow{
+      transform:rotate(225deg);
+    }
+
+    .dropdown{
+      position:absolute;
+      top:68px;
+      left:0;
+      width:245px;
+      padding:10px;
+      background:#fff;
+      border:1px solid #ededf2;
+      border-radius:15px;
+      box-shadow:0 18px 50px rgba(0,0,0,.10);
+      opacity:0;
+      visibility:hidden;
+      transform:translateY(12px);
+      transition:.22s;
+    }
+
+    .nav-item:hover > .dropdown{
+      opacity:1;
+      visibility:visible;
+      transform:translateY(0);
+    }
+
+    .dropdown > a{
+      display:block;
+      padding:12px 13px;
+      border-radius:10px;
+      font-size:13.5px;
+      color:#444;
+      transition:.2s;
+    }
+
+    .dropdown > a:hover{
+      background:#f6f3ff;
+      color:#7450e8;
+      padding-left:17px;
+    }
+
+    .mega-dropdown{
+      width:620px;
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:7px;
+      padding:15px;
+    }
+
+    .mega-box{
+      padding:14px;
+      border-radius:12px;
+    }
+
+    .mega-box:hover{
+      background:#f7f5ff;
+    }
+
+    .mega-box strong{
+      display:block;
+      margin-bottom:5px;
+      font-size:14px;
+    }
+
+    .mega-box p{
+      color:#777;
+      font-size:12px;
+      line-height:1.5;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .login-btn{
+      padding:10px 14px;
+      font-size:13.5px;
+      font-weight:600;
+      border-radius:9px;
+    }
+
+    .get-started{
+      padding:11px 17px;
+      background:#111;
+      color:#fff;
+      border-radius:10px;
+      font-size:13.5px;
+      font-weight:700;
+    }
+
+    .menu-toggle{
+      display:none;
+      width:42px;
+      height:42px;
+      border:0;
+      background:#f3f3f5;
+      border-radius:10px;
+      align-items:center;
+      justify-content:center;
+      flex-direction:column;
+      gap:4px;
+      cursor:pointer;
+    }
+
+    .menu-toggle span{
+      width:20px;
+      height:2px;
+      background:#111;
+    }
+
+    .hero{
+      min-height:100vh;
+      position:relative;
+      overflow:hidden;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:120px 24px 70px;
+      background:
+        linear-gradient(
+          180deg,
+          #ffffff 0%,
+          #fafafe 55%,
+          #ffffff 100%
+        );
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background-image:
+        linear-gradient(
+          rgba(30,30,50,.045) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(30,30,50,.045) 1px,
+          transparent 1px
+        );
+      background-size:55px 55px;
+      mask-image:linear-gradient(
+        to bottom,
+        black 0%,
+        rgba(0,0,0,.8) 60%,
+        transparent 100%
+      );
+      -webkit-mask-image:linear-gradient(
+        to bottom,
+        black 0%,
+        rgba(0,0,0,.8) 60%,
+        transparent 100%
+      );
+      pointer-events:none;
+    }
+
+    .hero-content{
+      width:100%;
+      max-width:1200px;
+      position:relative;
+      z-index:3;
+      text-align:center;
+    }
+
+    .hero-title{
+      max-width:1000px;
+      margin:auto;
+      font-size:clamp(48px,7vw,92px);
+      font-weight:900;
+      line-height:.92;
+      letter-spacing:-5px;
+      color:#111116;
+    }
+
+    .hero-title span{
+      display:block;
+    }
+
+    .hero-title .impact{
+      margin-top:7px;
+      background:linear-gradient(
+        90deg,
+        #6d28d9,
+        #805be5,
+        #315fcc
+      );
+      -webkit-background-clip:text;
+      background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero-description{
+      width:max-content;
+      max-width:none;
+      margin:28px auto 0;
+      font-size:16px;
+      line-height:1.5;
+      color:#676772;
+      white-space:nowrap;
+    }
+
+    .hero-actions{
+      margin-top:32px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:12px;
+    }
+
+    .hero-btn{
+      min-height:48px;
+      padding:0 22px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:12px;
+      font-size:14px;
+      font-weight:700;
+      transition:.2s;
+    }
+
+    .explore-btn{
+      background:#111116;
+      color:#fff;
+    }
+
+    .explore-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    .program-btn{
+      background:#fff;
+      border:1px solid #e4e4e8;
+      color:#25252b;
+    }
+
+    .program-btn:hover{
+      transform:translateY(-2px);
+    }
+
+    @media(max-width:1000px){
+
+      .navbar{
+        height:70px;
+        padding:0 18px;
+      }
+
+      .logo{
+        font-size:18px;
+      }
+
+      .login-btn,
+      .get-started{
+        display:none;
+      }
+
+      .menu-toggle{
+        display:flex;
+      }
+
+      .nav-menu{
+        position:absolute;
+        top:70px;
+        left:0;
+        width:100%;
+        max-height:calc(100vh - 70px);
+        overflow:auto;
+        display:flex;
+        flex-direction:column;
+        align-items:stretch;
+        padding:12px 14px 18px;
+        background:#fff;
+        transform:translateY(-120%);
+        opacity:0;
+        pointer-events:none;
+        transition:.3s;
+      }
+
+      .nav-menu.active{
+        transform:translateY(0);
+        opacity:1;
+        pointer-events:auto;
+      }
+
+      .nav-item{
+        width:100%;
+      }
+
+      .nav-link{
+        width:100%;
+        padding:15px 13px;
+        justify-content:space-between;
+      }
+
+      .dropdown{
+        position:static;
+        width:100%;
+        max-height:0;
+        overflow:hidden;
+        padding:0 8px;
+        opacity:1;
+        visibility:visible;
+        transform:none;
+        background:#fafafa;
+        box-shadow:none;
+        border:none;
+        transition:.3s;
+      }
+
+      .nav-item.open > .dropdown{
+        max-height:900px;
+        padding:8px;
+      }
+
+      .mega-dropdown{
+        display:block;
+      }
+
+      .hero{
+        min-height:100svh;
+        padding:110px 20px 65px;
+      }
+
+      .hero-title{
+        font-size:clamp(46px,12vw,68px);
+        letter-spacing:-3.5px;
+      }
+
+      .hero-description{
+        width:auto;
+        max-width:700px;
+        white-space:normal;
+        font-size:15px;
+      }
+    }
+
+    @media(max-width:600px){
+
+      .navbar{
+        padding:0 14px;
+      }
+
+      .logo{
+        font-size:16px;
+      }
+
+      .hero-title{
+        font-size:clamp(42px,13vw,58px);
+        letter-spacing:-3px;
+      }
+
+      .hero-description{
+        max-width:350px;
+        font-size:14px;
+        line-height:1.65;
+      }
+
+      .hero-actions{
+        flex-direction:column;
+      }
+
+      .hero-btn{
+        width:100%;
+        max-width:320px;
+      }
+    }
+
+  
+    /* =========================================================
+       INFINITE IMAGE SHOWCASE
+    ========================================================= */
+
+    .showcase{
+      position:relative;
+      width:100%;
+      overflow:hidden;
+      padding:72px 0 84px;
+      background:#070707;
+    }
+
+    .showcase-head{
+      width:min(1180px,92%);
+      margin:0 auto 38px;
+      text-align:center;
+      color:#fff;
+    }
+
+    .showcase-head p{
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:2.4px;
+      text-transform:uppercase;
+      color:#9b7cff;
+      margin-bottom:12px;
+    }
+
+    .showcase-head h2{
+      font-size:clamp(34px,4.2vw,64px);
+      line-height:1;
+      letter-spacing:-2.5px;
+      font-weight:900;
+    }
+
+    .marquee-row{
+      width:100%;
+      overflow:hidden;
+      position:relative;
+      margin-top:18px;
+    }
+
+    .marquee-row + .marquee-row{
+      margin-top:22px;
+    }
+
+    .marquee-track{
+      width:max-content;
+      display:flex;
+      align-items:center;
+      will-change:transform;
+    }
+
+    .marquee-group{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      padding-right:18px;
+      flex-shrink:0;
+    }
+
+    .marquee-card{
+      width:340px;
+      height:215px;
+      flex:0 0 340px;
+      overflow:hidden;
+      border-radius:16px;
+      background:#181818;
+      box-shadow:0 12px 38px rgba(0,0,0,.22);
+    }
+
+    .marquee-card img{
+      width:100%;
+      height:100%;
+      display:block;
+      object-fit:cover;
+      transition:transform .5s ease;
+    }
+
+    .marquee-card:hover img{
+      transform:scale(1.045);
+    }
+
+    /* first row: moves to the right */
+    .marquee-right .marquee-track{
+      animation:scrollRight 42s linear infinite;
+    }
+
+    /* second row: moves to the left */
+    .marquee-left .marquee-track{
+      animation:scrollLeft 42s linear infinite;
+    }
+
+    .marquee-row:hover .marquee-track{
+      animation-play-state:paused;
+    }
+
+    @keyframes scrollLeft{
+      from{
+        transform:translateX(0);
+      }
+      to{
+        transform:translateX(-50%);
+      }
+    }
+
+    @keyframes scrollRight{
+      from{
+        transform:translateX(-50%);
+      }
+      to{
+        transform:translateX(0);
+      }
+    }
+
+    @media(max-width:900px){
+      .showcase{
+        padding:58px 0 68px;
+      }
+
+      .showcase-head{
+        margin-bottom:30px;
+      }
+
+      .marquee-card{
+        width:280px;
+        height:178px;
+        flex-basis:280px;
+        border-radius:14px;
+      }
+
+      .marquee-group{
+        gap:14px;
+        padding-right:14px;
+      }
+
+      .marquee-right .marquee-track,
+      .marquee-left .marquee-track{
+        animation-duration:34s;
+      }
+    }
+
+    @media(max-width:600px){
+      .showcase{
+        padding:48px 0 58px;
+      }
+
+      .showcase-head{
+        width:88%;
+        margin-bottom:24px;
+      }
+
+      .showcase-head p{
+        font-size:10px;
+      }
+
+      .showcase-head h2{
+        font-size:34px;
+        letter-spacing:-1.5px;
+      }
+
+      .marquee-card{
+        width:235px;
+        height:150px;
+        flex-basis:235px;
+        border-radius:12px;
+      }
+
+      .marquee-group{
+        gap:12px;
+        padding-right:12px;
+      }
+
+      .marquee-row + .marquee-row{
+        margin-top:14px;
+      }
+
+      .marquee-right .marquee-track,
+      .marquee-left .marquee-track{
+        animation-duration:29s;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      .marquee-track{
+        animation-play-state:paused !important;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+<nav class="navbar">
+
+  <a href="#" class="logo">
+    <span class="logo-main">TRIVOX</span>
+    <span class="logo-impact">AI IMPACT</span>
+  </a>
+
+  <ul class="nav-menu" id="navMenu">
+
+    <li class="nav-item has-dropdown">
+      <div class="nav-link">
+        Company
+        <span class="arrow"></span>
+      </div>
+
+      <div class="dropdown">
+        <a href="#">About TRIVOX</a>
+        <a href="#">Our Mission</a>
+        <a href="#">Our Vision</a>
+        <a href="#">Leadership</a>
+        <a href="#">Our Team</a>
+        <a href="#">Partners</a>
+        <a href="#">Impact</a>
+      </div>
+    </li>
+
+    <li class="nav-item has-dropdown">
+      <div class="nav-link">
+        Learning
+        <span class="arrow"></span>
+      </div>
+
+      <div class="dropdown mega-dropdown">
+
+        <a href="#" class="mega-box">
+          <strong>AI Learning</strong>
+          <p>Learn AI concepts, tools and real-world applications.</p>
+        </a>
+
+        <a href="#" class="mega-box">
+          <strong>Programming</strong>
+          <p>Build strong coding and problem-solving skills.</p>
+        </a>
+
+        <a href="#" class="mega-box">
+          <strong>Web Development</strong>
+          <p>Build responsive modern websites.</p>
+        </a>
+
+        <a href="#" class="mega-box">
+          <strong>App Development</strong>
+          <p>Learn modern application development.</p>
+        </a>
+
+        <a href="#" class="mega-box">
+          <strong>Data Science</strong>
+          <p>Explore analytics and intelligent data.</p>
+        </a>
+
+        <a href="#" class="mega-box">
+          <strong>Cyber Security</strong>
+          <p>Understand security concepts and practices.</p>
+        </a>
+
+      </div>
+    </li>
+
+    <li class="nav-item has-dropdown">
+      <div class="nav-link">
+        Programs
+        <span class="arrow"></span>
+      </div>
+
+      <div class="dropdown">
+        <a href="#">Student Programs</a>
+        <a href="#">College Programs</a>
+        <a href="#">Internships</a>
+        <a href="#">Workshops</a>
+        <a href="#">Bootcamps</a>
+        <a href="#">Career Programs</a>
+        <a href="#">Certification Programs</a>
+      </div>
+    </li>
+
+    <li class="nav-item has-dropdown">
+      <div class="nav-link">
+        Solutions
+        <span class="arrow"></span>
+      </div>
+
+      <div class="dropdown mega-dropdown">
+
+        <a href="#" class="mega-box">
+          <strong>For Students</strong>
+          <p>Skills, projects and career support.</p>
+        </a>
+
+        <a href="#" class="mega-box">
+          <strong>For Colleges</strong>
+          <p>Industry-ready learning programs.</p>
+        </a>
+
+        <a href="#" class="mega-box">
+          <strong>For Schools</strong>
+          <p>Modern technology and AI learning.</p>
+        </a>
+
+        <a href="#" class="mega-box">
+          <strong>For Companies</strong>
+          <p>Training and technology solutions.</p>
+        </a>
+
+      </div>
+    </li>
+
+    <li class="nav-item has-dropdown">
+      <div class="nav-link">
+        Resources
+        <span class="arrow"></span>
+      </div>
+
+      <div class="dropdown">
+        <a href="#">Blogs</a>
+        <a href="#">Tutorials</a>
+        <a href="#">Learning Resources</a>
+        <a href="#">Student Projects</a>
+        <a href="#">Success Stories</a>
+        <a href="#">Events</a>
+        <a href="#">FAQs</a>
+      </div>
+    </li>
+
+    <li class="nav-item has-dropdown">
+      <div class="nav-link">
+        Careers
+        <span class="arrow"></span>
+      </div>
+
+      <div class="dropdown">
+        <a href="#">Open Positions</a>
+        <a href="#">Internships</a>
+        <a href="#">Campus Hiring</a>
+        <a href="#">Join Our Team</a>
+        <a href="#">Life at TRIVOX</a>
+      </div>
+    </li>
+
+    <li class="nav-item">
+      <a href="#" class="nav-link">Contact</a>
+    </li>
+
+  </ul>
+
+  <div class="nav-actions">
+
+    <a href="#" class="login-btn">
+      Sign In
+    </a>
+
+    <a href="#" class="get-started">
+      Get Started
+    </a>
+
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </div>
+
+</nav>
+
+<section class="hero">
+
+  <div class="hero-content">
+
+    <h1 class="hero-title">
+
+      <span>
+        Don’t just learn.
+      </span>
+
+      <span class="impact">
+        Make an impact.
+      </span>
+
+    </h1>
+
+    <p class="hero-description">
+      Explore technology, build meaningful projects and turn your skills into real-world impact with TRIVOX AI IMPACT.
+    </p>
+
+    <div class="hero-actions">
+
+      <a href="#" class="hero-btn explore-btn">
+        Explore TRIVOX
+      </a>
+
+      <a href="#" class="hero-btn program-btn">
+        View Programs
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<section class="showcase">
+
+  <div class="showcase-head">
+    <p>Explore what we build</p>
+    <h2>Ideas moving into impact.</h2>
+  </div>
+
+  <!-- ROW 1 — 9 IMAGES — MOVES RIGHT -->
+  <div class="marquee-row marquee-right">
+    <div class="marquee-track">
+
+      <div class="marquee-group">
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85" alt="Technology workspace"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=85" alt="Students learning together"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=85" alt="Programming code"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=85" alt="Team collaboration"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=85" alt="Developer working"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=85" alt="Project planning"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=85" alt="Creative team meeting"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=85" alt="Team at work"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=85" alt="Laptop development"></div>
+      </div>
+
+      <!-- EXACT DUPLICATE FOR SEAMLESS LOOP -->
+      <div class="marquee-group" aria-hidden="true">
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=85" alt=""></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ROW 2 — 9 IMAGES — MOVES LEFT -->
+  <div class="marquee-row marquee-left">
+    <div class="marquee-track">
+
+      <div class="marquee-group">
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=900&q=85" alt="Coding setup"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=85" alt="Technology team"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=900&q=85" alt="Modern laptop"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=85" alt="Office collaboration"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85" alt="Students studying"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85" alt="Team project"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=85" alt="Learning environment"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=85" alt="Focused learning"></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=900&q=85" alt="Digital learning"></div>
+      </div>
+
+      <!-- EXACT DUPLICATE FOR SEAMLESS LOOP -->
+      <div class="marquee-group" aria-hidden="true">
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=85" alt=""></div>
+        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=900&q=85" alt=""></div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+
+<script>
+
+  const menuToggle =
+    document.getElementById("menuToggle");
+
+  const navMenu =
+    document.getElementById("navMenu");
+
+  const dropdownItems =
+    document.querySelectorAll(".has-dropdown");
+
+  menuToggle.addEventListener(
+    "click",
+    () => {
+      navMenu.classList.toggle("active");
+    }
+  );
+
+  dropdownItems.forEach(item => {
+
+    const navLink =
+      item.querySelector(".nav-link");
+
+    navLink.addEventListener(
+      "click",
+      function(e){
+
+        if(window.innerWidth <= 1000){
+
+          e.preventDefault();
+
+          dropdownItems.forEach(other => {
+
+            if(other !== item){
+              other.classList.remove("open");
+            }
+
+          });
+
+          item.classList.toggle("open");
+
+        }
+
+      }
+    );
+
+  });
+
+  window.addEventListener(
+    "resize",
+    () => {
+
+      if(window.innerWidth > 1000){
+
+        navMenu.classList.remove("active");
+
+        dropdownItems.forEach(item => {
+          item.classList.remove("open");
+        });
+
+      }
+
+    }
+  );
+
+</script>
+
+</body>
+</html>

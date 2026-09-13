@@ -1,2824 +1,317 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>TRIVOX AI IMPACT</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" />
-
-  <style>
-    *{
-      margin:0;
-      padding:0;
-      box-sizing:border-box;
-    }
-
-    html{
-      scroll-behavior:smooth;
-    }
-
-    body{
-      font-family:Arial, Helvetica, sans-serif;
-      background:#fff;
-      color:#111;
-      overflow-x:hidden;
-    }
-
-    a{
-      text-decoration:none;
-      color:inherit;
-    }
-
-    .navbar{
-      width:100%;
-      height:76px;
-      position:fixed;
-      top:0;
-      left:0;
-      z-index:9999;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:0 4%;
-      background:rgba(255,255,255,.86);
-      backdrop-filter:blur(18px);
-      -webkit-backdrop-filter:blur(18px);
-      border-bottom:1px solid rgba(0,0,0,.06);
-    }
-
-    .logo{
-      display:flex;
-      align-items:center;
-      white-space:nowrap;
-      font-size:23px;
-      font-weight:900;
-      letter-spacing:-1px;
-    }
-
-    .logo-main{
-      background:linear-gradient(
-        to bottom,
-        #111 0%,
-        #111 50%,
-        #7450e8 50%,
-        #7450e8 100%
-      );
-      -webkit-background-clip:text;
-      background-clip:text;
-      -webkit-text-fill-color:transparent;
-    }
-
-    .logo-impact{
-      margin-left:7px;
-      background:linear-gradient(
-        to bottom,
-        #7450e8 0%,
-        #7450e8 50%,
-        #222 50%,
-        #222 100%
-      );
-      -webkit-background-clip:text;
-      background-clip:text;
-      -webkit-text-fill-color:transparent;
-    }
-
-    .nav-menu{
-      display:flex;
-      align-items:center;
-      gap:3px;
-      list-style:none;
-    }
-
-    .nav-item{
-      position:relative;
-    }
-
-    .nav-link{
-      padding:28px 10px;
-      display:flex;
-      align-items:center;
-      gap:6px;
-      font-size:13.5px;
-      font-weight:600;
-      color:#37373d;
-      cursor:pointer;
-      white-space:nowrap;
-      transition:.2s;
-    }
-
-    .nav-link:hover{
-      color:#7450e8;
-    }
-
-    .arrow{
-      width:6px;
-      height:6px;
-      border-right:1.5px solid currentColor;
-      border-bottom:1.5px solid currentColor;
-      transform:rotate(45deg) translateY(-2px);
-      transition:.2s;
-    }
-
-    .nav-item:hover .arrow{
-      transform:rotate(225deg);
-    }
-
-    .dropdown{
-      position:absolute;
-      top:68px;
-      left:0;
-      width:245px;
-      padding:10px;
-      background:#fff;
-      border:1px solid #ededf2;
-      border-radius:15px;
-      box-shadow:0 18px 50px rgba(0,0,0,.10);
-      opacity:0;
-      visibility:hidden;
-      transform:translateY(12px);
-      transition:.22s;
-    }
-
-    .nav-item:hover > .dropdown{
-      opacity:1;
-      visibility:visible;
-      transform:translateY(0);
-    }
-
-    .dropdown > a{
-      display:block;
-      padding:12px 13px;
-      border-radius:10px;
-      font-size:13.5px;
-      color:#444;
-      transition:.2s;
-    }
-
-    .dropdown > a:hover{
-      background:#f6f3ff;
-      color:#7450e8;
-      padding-left:17px;
-    }
-
-    .mega-dropdown{
-      width:620px;
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:7px;
-      padding:15px;
-    }
-
-    .mega-box{
-      padding:14px;
-      border-radius:12px;
-    }
-
-    .mega-box:hover{
-      background:#f7f5ff;
-    }
-
-    .mega-box strong{
-      display:block;
-      margin-bottom:5px;
-      font-size:14px;
-    }
-
-    .mega-box p{
-      color:#777;
-      font-size:12px;
-      line-height:1.5;
-    }
-
-    .nav-actions{
-      display:flex;
-      align-items:center;
-      gap:10px;
-    }
-
-    .login-btn{
-      padding:10px 14px;
-      font-size:13.5px;
-      font-weight:600;
-      border-radius:9px;
-    }
-
-    .get-started{
-      padding:11px 17px;
-      background:#111;
-      color:#fff;
-      border-radius:10px;
-      font-size:13.5px;
-      font-weight:700;
-    }
-
-    .menu-toggle{
-      display:none;
-      width:42px;
-      height:42px;
-      border:0;
-      background:#f3f3f5;
-      border-radius:10px;
-      align-items:center;
-      justify-content:center;
-      flex-direction:column;
-      gap:4px;
-      cursor:pointer;
-    }
-
-    .menu-toggle span{
-      width:20px;
-      height:2px;
-      background:#111;
-    }
-
-    .hero{
-      min-height:72vh;
-      position:relative;
-      overflow:hidden;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      padding:96px 24px 44px;
-      background:
-        linear-gradient(
-          180deg,
-          #ffffff 0%,
-          #fafafe 55%,
-          #ffffff 100%
-        );
-    }
-
-    .hero::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background-image:
-        linear-gradient(
-          rgba(30,30,50,.045) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(30,30,50,.045) 1px,
-          transparent 1px
-        );
-      background-size:55px 55px;
-      mask-image:linear-gradient(
-        to bottom,
-        black 0%,
-        rgba(0,0,0,.8) 60%,
-        transparent 100%
-      );
-      -webkit-mask-image:linear-gradient(
-        to bottom,
-        black 0%,
-        rgba(0,0,0,.8) 60%,
-        transparent 100%
-      );
-      pointer-events:none;
-    }
-
-    .hero-content{
-      width:100%;
-      max-width:1200px;
-      position:relative;
-      z-index:3;
-      text-align:center;
-    }
-
-    .hero-title{
-      max-width:1000px;
-      margin:auto;
-      font-size:clamp(48px,7vw,92px);
-      font-weight:900;
-      line-height:.92;
-      letter-spacing:-5px;
-      color:#111116;
-    }
-
-    .hero-title span{
-      display:block;
-    }
-
-    .hero-title .impact{
-      margin-top:7px;
-      background:linear-gradient(
-        90deg,
-        #6d28d9,
-        #805be5,
-        #315fcc
-      );
-      -webkit-background-clip:text;
-      background-clip:text;
-      -webkit-text-fill-color:transparent;
-    }
-
-    .hero-description{
-      width:max-content;
-      max-width:none;
-      margin:28px auto 0;
-      font-size:16px;
-      line-height:1.5;
-      color:#676772;
-      white-space:nowrap;
-    }
-
-    .hero-actions{
-      margin-top:32px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:12px;
-    }
-
-    .hero-btn{
-      min-height:48px;
-      padding:0 22px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:12px;
-      font-size:14px;
-      font-weight:700;
-      transition:.2s;
-    }
-
-    .explore-btn{
-      background:#111116;
-      color:#fff;
-    }
-
-    .explore-btn:hover{
-      transform:translateY(-2px);
-    }
-
-    .program-btn{
-      background:#fff;
-      border:1px solid #e4e4e8;
-      color:#25252b;
-    }
-
-    .program-btn:hover{
-      transform:translateY(-2px);
-    }
-
-    @media(max-width:1000px){
-
-      .navbar{
-        height:70px;
-        padding:0 18px;
-      }
-
-      .logo{
-        font-size:18px;
-      }
-
-      .login-btn,
-      .get-started{
-        display:none;
-      }
-
-      .menu-toggle{
-        display:flex;
-      }
-
-      .nav-menu{
-        position:absolute;
-        top:70px;
-        left:0;
-        width:100%;
-        max-height:calc(100vh - 70px);
-        overflow:auto;
-        display:flex;
-        flex-direction:column;
-        align-items:stretch;
-        padding:12px 14px 18px;
-        background:#fff;
-        transform:translateY(-120%);
-        opacity:0;
-        pointer-events:none;
-        transition:.3s;
-      }
-
-      .nav-menu.active{
-        transform:translateY(0);
-        opacity:1;
-        pointer-events:auto;
-      }
-
-      .nav-item{
-        width:100%;
-      }
-
-      .nav-link{
-        width:100%;
-        padding:15px 13px;
-        justify-content:space-between;
-      }
-
-      .dropdown{
-        position:static;
-        width:100%;
-        max-height:0;
-        overflow:hidden;
-        padding:0 8px;
-        opacity:1;
-        visibility:visible;
-        transform:none;
-        background:#fafafa;
-        box-shadow:none;
-        border:none;
-        transition:.3s;
-      }
-
-      .nav-item.open > .dropdown{
-        max-height:900px;
-        padding:8px;
-      }
-
-      .mega-dropdown{
-        display:block;
-      }
-
-      .hero{
-        min-height:68svh;
-        padding:92px 20px 42px;
-      }
-
-      .hero-title{
-        font-size:clamp(46px,12vw,68px);
-        letter-spacing:-3.5px;
-      }
-
-      .hero-description{
-        width:auto;
-        max-width:700px;
-        white-space:normal;
-        font-size:15px;
-      }
-    }
-
-    @media(max-width:600px){
-
-      .hero{
-        min-height:64svh;
-        padding:84px 16px 34px;
-      }
-
-      .navbar{
-        padding:0 14px;
-      }
-
-      .logo{
-        font-size:16px;
-      }
-
-      .hero-title{
-        font-size:clamp(42px,13vw,58px);
-        letter-spacing:-3px;
-      }
-
-      .hero-description{
-        max-width:350px;
-        font-size:14px;
-        line-height:1.65;
-      }
-
-      .hero-actions{
-        flex-direction:column;
-      }
-
-      .hero-btn{
-        width:100%;
-        max-width:320px;
-      }
-    }
-
-  
-    /* =========================================================
-       INFINITE IMAGE SHOWCASE
-    ========================================================= */
-
-    .showcase{
-      position:relative;
-      width:100%;
-      overflow:hidden;
-      padding:36px 0 44px;
-      background:#ffffff;
-    }
-
-    .showcase-head{
-      width:min(1180px,92%);
-      margin:0 auto 28px;
-      text-align:center;
-      color:#111116;
-    }
-
-    .showcase-head p{
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:2.4px;
-      text-transform:uppercase;
-      color:#9b7cff;
-      margin-bottom:12px;
-    }
-
-    .showcase-head h2{
-      font-size:clamp(34px,4.2vw,64px);
-      line-height:1;
-      letter-spacing:-2.5px;
-      font-weight:900;
-    }
-
-    .marquee-row{
-      width:100%;
-      overflow:hidden;
-      position:relative;
-      margin-top:18px;
-    }
-
-    .marquee-row + .marquee-row{
-      margin-top:22px;
-    }
-
-    .marquee-track{
-      width:max-content;
-      display:flex;
-      align-items:center;
-      will-change:transform;
-    }
-
-    .marquee-group{
-      display:flex;
-      align-items:center;
-      gap:18px;
-      padding-right:18px;
-      flex-shrink:0;
-    }
-
-    .marquee-card{
-      width:340px;
-      height:215px;
-      flex:0 0 340px;
-      overflow:hidden;
-      border-radius:16px;
-      background:#f4f4f6;
-      box-shadow:0 12px 38px rgba(0,0,0,.22);
-    }
-
-    .marquee-card img{
-      width:100%;
-      height:100%;
-      display:block;
-      object-fit:cover;
-      transition:transform .5s ease;
-    }
-
-    .marquee-card:hover img{
-      transform:scale(1.045);
-    }
-
-    /* first row: moves to the right */
-    .marquee-right .marquee-track{
-      animation:scrollRight 42s linear infinite;
-    }
-
-    /* second row: moves to the left */
-    .marquee-left .marquee-track{
-      animation:scrollLeft 42s linear infinite;
-    }
-
-    .marquee-row:hover .marquee-track{
-      animation-play-state:paused;
-    }
-
-    @keyframes scrollLeft{
-      from{
-        transform:translateX(0);
-      }
-      to{
-        transform:translateX(-50%);
-      }
-    }
-
-    @keyframes scrollRight{
-      from{
-        transform:translateX(-50%);
-      }
-      to{
-        transform:translateX(0);
-      }
-    }
-
-    @media(max-width:900px){
-      .showcase{
-        padding:42px 0 50px;
-      }
-
-      .showcase-head{
-        margin-bottom:30px;
-      }
-
-      .marquee-card{
-        width:280px;
-        height:178px;
-        flex-basis:280px;
-        border-radius:14px;
-      }
-
-      .marquee-group{
-        gap:14px;
-        padding-right:14px;
-      }
-
-      .marquee-right .marquee-track,
-      .marquee-left .marquee-track{
-        animation-duration:34s;
-      }
-    }
-
-    @media(max-width:600px){
-      .showcase{
-        padding:48px 0 58px;
-      }
-
-      .showcase-head{
-        width:88%;
-        margin-bottom:24px;
-      }
-
-      .showcase-head p{
-        font-size:10px;
-      }
-
-      .showcase-head h2{
-        font-size:34px;
-        letter-spacing:-1.5px;
-      }
-
-      .marquee-card{
-        width:235px;
-        height:150px;
-        flex-basis:235px;
-        border-radius:12px;
-      }
-
-      .marquee-group{
-        gap:12px;
-        padding-right:12px;
-      }
-
-      .marquee-row + .marquee-row{
-        margin-top:14px;
-      }
-
-      .marquee-right .marquee-track,
-      .marquee-left .marquee-track{
-        animation-duration:29s;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .marquee-track{
-        animation-play-state:paused !important;
-      }
-    }
-
-  
-    /* =========================================================
-       HERO FA ICONS — RISE FROM TEXT + FALL BACK TO TEXT
-    ========================================================= */
-
-    .hero-icon-field{
-      position:absolute;
-      left:50%;
-      top:50%;
-      width:min(980px,92vw);
-      height:330px;
-      transform:translate(-50%,-48%);
-      z-index:2;
-      pointer-events:none;
-      overflow:visible;
-    }
-
-    .hero-fa{
-      position:absolute;
-      left:var(--x);
-      top:62%;
-      font-size:var(--size);
-      color:rgba(116,80,232,.28);
-      opacity:0;
-      transform:translate(-50%,0) scale(.72) rotate(0deg);
-      animation:textIconLift var(--duration) cubic-bezier(.45,0,.25,1) var(--delay) infinite;
-      will-change:transform,opacity;
-    }
-
-    .hero-fa:nth-child(3n){
-      color:rgba(49,95,204,.24);
-    }
-
-    .hero-fa:nth-child(4n){
-      color:rgba(20,20,26,.17);
-    }
-
-    @keyframes textIconLift{
-      0%{
-        opacity:0;
-        transform:
-          translate(-50%,18px)
-          scale(.65)
-          rotate(-5deg);
-      }
-
-      10%{
-        opacity:.2;
-      }
-
-      22%{
-        opacity:.62;
-        transform:
-          translate(calc(-50% + var(--drift-small)),-34px)
-          scale(.88)
-          rotate(3deg);
-      }
-
-      48%{
-        opacity:.72;
-        transform:
-          translate(calc(-50% + var(--drift)),-135px)
-          scale(1)
-          rotate(9deg);
-      }
-
-      58%{
-        opacity:.68;
-        transform:
-          translate(calc(-50% + var(--drift)), -150px)
-          scale(1.02)
-          rotate(11deg);
-      }
-
-      76%{
-        opacity:.52;
-        transform:
-          translate(calc(-50% + var(--drift-small)),-58px)
-          scale(.92)
-          rotate(4deg);
-      }
-
-      92%{
-        opacity:.22;
-        transform:
-          translate(-50%,2px)
-          scale(.75)
-          rotate(0deg);
-      }
-
-      100%{
-        opacity:0;
-        transform:
-          translate(-50%,18px)
-          scale(.65)
-          rotate(-4deg);
-      }
-    }
-
-    @media(max-width:1000px){
-      .hero-icon-field{
-        width:92vw;
-        height:280px;
-        transform:translate(-50%,-45%);
-      }
-
-      .hero-fa{
-        top:64%;
-        font-size:calc(var(--size) * .86);
-      }
-    }
-
-    @media(max-width:600px){
-      .hero-icon-field{
-        width:94vw;
-        height:240px;
-        transform:translate(-50%,-42%);
-      }
-
-      .hero-fa{
-        top:66%;
-        font-size:calc(var(--size) * .72);
-      }
-
-      .hero-fa:nth-child(n+11){
-        display:none;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce){
-      .hero-fa{
-        animation:none;
-        opacity:.14;
-      }
-    }
-
-  
-    /* ===== FIXED TEXT-ORIGIN ICON ANIMATION ===== */
-    .hero-content{
-      position:relative;
-      isolation:isolate;
-    }
-
-    .hero-title,
-    .hero-description,
-    .hero-actions{
-      position:relative;
-      z-index:3;
-    }
-
-    .text-icon-layer{
-      position:absolute;
-      left:50%;
-      top:50%;
-      width:min(900px, 92vw);
-      height:260px;
-      transform:translate(-50%,-62%);
-      z-index:1;
-      pointer-events:none;
-      overflow:visible;
-    }
-
-    .text-fall-icon{
-      position:absolute;
-      left:var(--x);
-      bottom:18px;
-      font-size:var(--s);
-      color:rgba(116,80,232,.34);
-      opacity:0;
-      transform:translate(-50%,0) scale(.75);
-      animation:riseFromText var(--t) ease-in-out var(--d) infinite;
-      will-change:transform,opacity;
-    }
-
-    .text-fall-icon:nth-child(3n){
-      color:rgba(49,95,204,.28);
-    }
-
-    .text-fall-icon:nth-child(4n){
-      color:rgba(20,20,26,.20);
-    }
-
-    @keyframes riseFromText{
-      0%{
-        opacity:0;
-        transform:translate(-50%, 18px) scale(.7) rotate(-5deg);
-      }
-      15%{
-        opacity:.7;
-      }
-      45%{
-        opacity:.75;
-        transform:translate(calc(-50% + var(--dx)), -145px) scale(1) rotate(9deg);
-      }
-      55%{
-        opacity:.75;
-        transform:translate(calc(-50% + var(--dx)), -155px) scale(1.02) rotate(11deg);
-      }
-      82%{
-        opacity:.48;
-        transform:translate(calc(-50% + var(--dx2)), -45px) scale(.9) rotate(3deg);
-      }
-      100%{
-        opacity:0;
-        transform:translate(-50%, 18px) scale(.72) rotate(-4deg);
-      }
-    }
-
-    @media(max-width:1000px){
-      .text-icon-layer{
-        width:94vw;
-        height:220px;
-        transform:translate(-50%,-58%);
-      }
-      .text-fall-icon{
-        font-size:calc(var(--s) * .84);
-      }
-    }
-
-    @media(max-width:600px){
-      .text-icon-layer{
-        width:96vw;
-        height:190px;
-        transform:translate(-50%,-55%);
-      }
-      .text-fall-icon{
-        font-size:calc(var(--s) * .72);
-      }
-      .text-fall-icon:nth-child(n+10){
-        display:none;
-      }
-    }
-
-  
-    /* FINAL RELIABLE ICON MOTION */
-    .text-icon-layer{
-      position:absolute !important;
-      left:50% !important;
-      top:46% !important;
-      width:min(920px,92vw) !important;
-      height:240px !important;
-      transform:translate(-50%,-50%) !important;
-      z-index:2 !important;
-      pointer-events:none !important;
-      overflow:visible !important;
-    }
-
-    .text-fall-icon{
-      position:absolute !important;
-      left:var(--x) !important;
-      bottom:10px !important;
-      display:block !important;
-      font-size:var(--s) !important;
-      color:rgba(116,80,232,.42) !important;
-      opacity:0;
-      animation:trivoxIconBounce var(--t) ease-in-out var(--d) infinite !important;
-      will-change:transform,opacity;
-    }
-
-    @keyframes trivoxIconBounce{
-      0%{
-        opacity:0;
-        transform:translate(-50%, 18px) scale(.75);
-      }
-      18%{
-        opacity:.8;
-      }
-      50%{
-        opacity:.95;
-        transform:translate(calc(-50% + var(--dx)), -135px) scale(1.05);
-      }
-      72%{
-        opacity:.65;
-        transform:translate(calc(-50% + var(--dx2)), -62px) scale(.94);
-      }
-      100%{
-        opacity:0;
-        transform:translate(-50%, 18px) scale(.75);
-      }
-    }
-
-    @media(max-width:600px){
-      .text-icon-layer{
-        top:44% !important;
-        height:190px !important;
-      }
-
-      .text-fall-icon{
-        font-size:calc(var(--s) * .72) !important;
-      }
-    }
-
-
-    /* ===== BIG SIDE ICONS: BOTTOM -> UP/OUT -> FALL DOWN ===== */
-    .text-icon-layer{
-      position:absolute !important;
-      left:50% !important;
-      top:50% !important;
-      width:min(1120px, 98vw) !important;
-      height:360px !important;
-      transform:translate(-50%,-42%) !important;
-      z-index:2 !important;
-      overflow:visible !important;
-      pointer-events:none !important;
-    }
-
-    .text-fall-icon{
-      position:absolute !important;
-      left:50% !important;
-      bottom:0 !important;
-      display:block !important;
-      font-size:var(--big) !important;
-      color:rgba(116,80,232,.38) !important;
-      opacity:0;
-      filter:none !important;
-      animation:bigSideRiseFall var(--speed) cubic-bezier(.42,0,.28,1) var(--wait) infinite !important;
-      will-change:transform,opacity;
-    }
-
-    @keyframes bigSideRiseFall{
-      0%{
-        opacity:0;
-        transform:
-          translate(-50%,55px)
-          scale(.62)
-          rotate(0deg);
-      }
-
-      12%{
-        opacity:.72;
-      }
-
-      48%{
-        opacity:.92;
-        transform:
-          translate(
-            calc(-50% + var(--side)),
-            var(--up)
-          )
-          scale(1)
-          rotate(var(--rot));
-      }
-
-      62%{
-        opacity:.9;
-        transform:
-          translate(
-            calc(-50% + var(--side)),
-            calc(var(--up) - 12px)
-          )
-          scale(1.04)
-          rotate(var(--rot));
-      }
-
-      82%{
-        opacity:.62;
-        transform:
-          translate(
-            calc(-50% + (var(--side) * .45)),
-            -70px
-          )
-          scale(.86)
-          rotate(2deg);
-      }
-
-      100%{
-        opacity:0;
-        transform:
-          translate(-50%,55px)
-          scale(.62)
-          rotate(0deg);
-      }
-    }
-
-    @media(max-width:1000px){
-      .text-icon-layer{
-        width:100vw !important;
-        height:300px !important;
-        transform:translate(-50%,-38%) !important;
-      }
-
-      .text-fall-icon{
-        font-size:calc(var(--big) * .78) !important;
-      }
-    }
-
-    @media(max-width:600px){
-      .text-icon-layer{
-        width:100vw !important;
-        height:250px !important;
-        top:49% !important;
-        transform:translate(-50%,-34%) !important;
-      }
-
-      .text-fall-icon{
-        font-size:calc(var(--big) * .58) !important;
-      }
-
-      .text-fall-icon:nth-child(n+8){
-        display:none !important;
-      }
-    }
-
-
-    /* ===== FINAL STATIC SIDE ICON POSITIONS ===== */
-    .text-icon-layer{
-      position:absolute !important;
-      left:50% !important;
-      top:50% !important;
-      width:min(1120px, 98vw) !important;
-      height:360px !important;
-      transform:translate(-50%,-42%) !important;
-      z-index:2 !important;
-      pointer-events:none !important;
-      overflow:visible !important;
-    }
-
-    .text-fall-icon{
-      position:absolute !important;
-      display:block !important;
-      animation:none !important;
-      opacity:.34 !important;
-      color:rgba(116,80,232,.34) !important;
-      transform:none !important;
-      filter:none !important;
-      font-size:var(--big) !important;
-      left:var(--left) !important;
-      top:var(--top) !important;
-    }
-
-    .text-fall-icon:nth-child(3n){
-      color:rgba(49,95,204,.27) !important;
-    }
-
-    .text-fall-icon:nth-child(4n){
-      color:rgba(20,20,26,.18) !important;
-    }
-
-    @media(max-width:1000px){
-      .text-icon-layer{
-        width:100vw !important;
-        height:300px !important;
-        transform:translate(-50%,-38%) !important;
-      }
-
-      .text-fall-icon{
-        font-size:calc(var(--big) * .76) !important;
-      }
-    }
-
-    @media(max-width:600px){
-      .text-icon-layer{
-        width:100vw !important;
-        height:240px !important;
-        top:49% !important;
-        transform:translate(-50%,-34%) !important;
-      }
-
-      .text-fall-icon{
-        font-size:calc(var(--big) * .56) !important;
-        opacity:.26 !important;
-      }
-
-      .text-fall-icon:nth-child(n+8){
-        display:none !important;
-      }
-    }
-
-
-
-
-/* =========================================================
-   TRIVOX MODEL — HOW IT WORKS
-========================================================= */
-.trivox-model{
-  background:#fff;
-  padding:92px 24px 105px;
-  border-top:1px solid #f0f0f3;
-}
-.model-wrap{width:min(1180px,100%);margin:auto}
-.model-head{max-width:820px;margin-bottom:54px}
-.model-label{
-  display:inline-flex;align-items:center;gap:9px;
-  font-size:11px;font-weight:800;letter-spacing:2px;
-  text-transform:uppercase;color:#7450e8;margin-bottom:16px
-}
-.model-label:before{content:"";width:32px;height:1px;background:#7450e8}
-.model-head h2{
-  font-size:clamp(40px,5.2vw,72px);line-height:.96;
-  letter-spacing:-3.8px;font-weight:900;color:#111116
-}
-.model-head h2 span{
-  background:linear-gradient(90deg,#6d28d9,#805be5,#315fcc);
-  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent
-}
-.model-head p{
-  max-width:680px;margin-top:20px;font-size:15.5px;
-  line-height:1.7;color:#72727b
-}
-.model-flow{
-  display:grid;grid-template-columns:repeat(5,1fr);
-  border-top:1px solid #e9e7ee;border-bottom:1px solid #e9e7ee
-}
-.model-item{
-  min-height:235px;padding:28px 24px 26px;
-  position:relative;border-right:1px solid #e9e7ee;
-  transition:.25s ease
-}
-.model-item:last-child{border-right:0}
-.model-item:hover{background:#faf9fe}
-.model-no{
-  display:flex;align-items:center;justify-content:space-between;
-  margin-bottom:40px;color:#aaa8b0;font-size:11px;
-  font-weight:800;letter-spacing:1px
-}
-.model-icon{
-  width:38px;height:38px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  background:#f2effc;color:#7450e8;font-size:14px
-}
-.model-item h3{
-  font-size:19px;line-height:1.15;letter-spacing:-.5px;
-  color:#17171c;margin-bottom:10px
-}
-.model-item p{font-size:13px;line-height:1.6;color:#7b7b84}
-.model-note{
-  margin-top:28px;display:flex;align-items:center;
-  justify-content:space-between;gap:24px
-}
-.model-note p{font-size:13px;line-height:1.6;color:#85858e}
-.model-note strong{color:#24242a}
-.model-btn{
-  flex:0 0 auto;padding:13px 18px;border-radius:10px;
-  background:#111116;color:#fff;font-size:13px;font-weight:700
-}
-@media(max-width:900px){
-  .trivox-model{padding:72px 20px 82px}
-  .model-flow{grid-template-columns:1fr 1fr}
-  .model-item{border-bottom:1px solid #e9e7ee}
-  .model-item:nth-child(2n){border-right:0}
-  .model-item:last-child{border-right:1px solid #e9e7ee}
-}
-@media(max-width:600px){
-  .trivox-model{padding:60px 18px 68px}
-  .model-head{margin-bottom:38px}
-  .model-head h2{font-size:42px;letter-spacing:-2.5px}
-  .model-flow{grid-template-columns:1fr}
-  .model-item,.model-item:last-child{
-    min-height:auto;border-right:0;padding:24px 5px
-  }
-  .model-no{margin-bottom:18px}
-  .model-note{align-items:flex-start;flex-direction:column}
-}
-
-
-/* =========================================================
-   NEXT SECTION — LEARNING EXPERIENCE
-========================================================= */
-.learning-experience{
-  position:relative;
-  overflow:hidden;
-  padding:105px 24px 115px;
-  background:#f8f7fc;
-}
-.learning-experience::before{
-  content:"";
-  position:absolute;
-  width:520px;height:520px;
-  border-radius:50%;
-  background:radial-gradient(circle,rgba(116,80,232,.12),transparent 68%);
-  right:-180px;top:-190px;
-  pointer-events:none;
-}
-.learning-wrap{
-  position:relative;z-index:1;
-  width:min(1180px,100%);
-  margin:auto;
-  display:grid;
-  grid-template-columns:.9fr 1.1fr;
-  gap:80px;
-  align-items:center;
-}
-.learning-copy h2{
-  max-width:530px;
-  font-size:clamp(44px,5.6vw,76px);
-  line-height:.95;
-  letter-spacing:-4px;
-  color:#111116;
-  font-weight:900;
-}
-.learning-copy h2 span{
-  background:linear-gradient(90deg,#6d28d9,#805be5,#315fcc);
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-.learning-copy>p{
-  max-width:510px;
-  margin-top:22px;
-  font-size:15.5px;
-  line-height:1.75;
-  color:#6f6f79;
-}
-.learning-points{
-  margin-top:34px;
-  display:flex;
-  flex-direction:column;
-  gap:18px;
-}
-.learning-point{
-  display:flex;
-  align-items:flex-start;
-  gap:14px;
-}
-.learning-point i{
-  width:38px;height:38px;
-  flex:0 0 38px;
-  display:flex;align-items:center;justify-content:center;
-  border-radius:50%;
-  background:#fff;
-  border:1px solid #e6e1f6;
-  color:#7450e8;
-  font-size:13px;
-}
-.learning-point strong{
-  display:block;
-  margin:2px 0 4px;
-  font-size:14px;
-  color:#222228;
-}
-.learning-point p{
-  font-size:12.5px;
-  line-height:1.55;
-  color:#85858e;
-}
-.learning-ui{
-  position:relative;
-  min-height:520px;
-}
-.course-window{
-  position:absolute;
-  width:min(530px,100%);
-  right:0;top:0;
-  padding:18px;
-  border-radius:24px;
-  background:#fff;
-  border:1px solid #ebe9f0;
-  box-shadow:0 30px 80px rgba(34,26,62,.10);
-}
-.course-top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:18px;
-}
-.course-user{
-  display:flex;align-items:center;gap:11px;
-}
-.course-avatar{
-  width:42px;height:42px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  background:#111116;color:#fff;
-  font-size:13px;font-weight:800;
-}
-.course-user strong{display:block;font-size:13px}
-.course-user span{display:block;margin-top:3px;font-size:10.5px;color:#9999a1}
-.course-percent{
-  font-size:12px;font-weight:800;color:#7450e8;
-}
-.course-hero{
-  padding:25px;
-  min-height:205px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#17171d,#302455 65%,#7450e8);
-  color:#fff;
-  display:flex;
-  flex-direction:column;
-  justify-content:space-between;
-}
-.course-hero small{
-  font-size:10px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  opacity:.65;
-}
-.course-hero h3{
-  max-width:340px;
-  margin-top:12px;
-  font-size:27px;
-  line-height:1.05;
-  letter-spacing:-1px;
-}
-.course-progress{
-  margin-top:24px;
-  height:5px;
-  border-radius:10px;
-  background:rgba(255,255,255,.18);
-  overflow:hidden;
-}
-.course-progress span{
-  display:block;width:68%;height:100%;
-  background:#fff;border-radius:inherit;
-}
-.course-lessons{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:10px;
-  margin-top:12px;
-}
-.course-mini{
-  padding:16px;
-  border-radius:15px;
-  background:#faf9fc;
-  border:1px solid #efedf3;
-}
-.course-mini i{
-  margin-bottom:20px;
-  font-size:17px;
-  color:#7450e8;
-}
-.course-mini strong{
-  display:block;font-size:12px;color:#27272d;
-}
-.course-mini span{
-  display:block;margin-top:5px;font-size:10.5px;color:#9a9aa2;
-}
-.certificate-float{
-  position:absolute;
-  left:-55px;
-  bottom:10px;
-  width:230px;
-  padding:17px;
-  border-radius:18px;
-  background:#fff;
-  border:1px solid #ebe8f1;
-  box-shadow:0 22px 55px rgba(36,26,70,.13);
-}
-.certificate-float .cert-icon{
-  width:42px;height:42px;
-  display:flex;align-items:center;justify-content:center;
-  border-radius:12px;
-  background:#f0ebff;
-  color:#7450e8;
-  margin-bottom:16px;
-}
-.certificate-float small{
-  font-size:9px;
-  font-weight:800;
-  letter-spacing:1.3px;
-  color:#aaa7b0;
-}
-.certificate-float h4{
-  margin-top:6px;
-  font-size:16px;
-  letter-spacing:-.4px;
-}
-.certificate-float p{
-  margin-top:6px;
-  font-size:10.5px;
-  line-height:1.5;
-  color:#8b8b94;
-}
-@media(max-width:900px){
-  .learning-experience{padding:80px 20px 95px}
-  .learning-wrap{grid-template-columns:1fr;gap:55px}
-  .learning-ui{width:min(620px,100%);margin:auto}
-}
-@media(max-width:600px){
-  .learning-experience{padding:65px 18px 75px}
-  .learning-copy h2{font-size:43px;letter-spacing:-2.7px}
-  .learning-ui{min-height:490px}
-  .course-window{width:100%;padding:14px;border-radius:20px}
-  .course-hero{padding:21px;min-height:190px}
-  .course-hero h3{font-size:24px}
-  .certificate-float{
-    left:12px;bottom:0;width:205px;
-  }
-}
-
-
-/* ===== LEARNING UI POLISH / TEXT CUT FIX ===== */
-.course-lessons{
-  grid-template-columns:repeat(2,minmax(0,1fr)) !important;
-  gap:12px !important;
-}
-.course-mini{
-  min-width:0;
-  min-height:118px;
-  padding:16px 15px 15px !important;
-  display:flex;
-  flex-direction:column;
-  align-items:flex-start;
-  justify-content:flex-start;
-  overflow:visible !important;
-}
-.course-mini i{
-  margin-bottom:16px !important;
-}
-.course-mini strong{
-  width:100%;
-  font-size:12.5px !important;
-  line-height:1.35;
-  white-space:normal;
-}
-.course-mini span{
-  width:100%;
-  margin-top:6px !important;
-  font-size:11px !important;
-  line-height:1.45 !important;
-  white-space:normal !important;
-  overflow:visible !important;
-  text-overflow:clip !important;
-}
-.course-window{
-  overflow:visible;
-}
-.course-top{
-  padding:2px 2px 0;
-}
-.course-percent{
-  padding:7px 10px;
-  border-radius:999px;
-  background:#f2effc;
-}
-.course-hero{
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.08);
-}
-.course-progress{
-  position:relative;
-}
-.course-progress::after{
-  content:"68% complete";
-  position:absolute;
-  right:0;
-  top:-22px;
-  font-size:9.5px;
-  font-weight:700;
-  letter-spacing:.3px;
-  color:rgba(255,255,255,.68);
-}
-@media(max-width:420px){
-  .course-lessons{
-    grid-template-columns:1fr !important;
-  }
-  .course-mini{
-    min-height:96px;
-  }
-  .learning-ui{
-    min-height:600px !important;
-  }
-}
-
-
-/* ===== CERTIFICATE LAYOUT FIX + AVATAR REMOVED ===== */
-.course-user{
-  gap:0 !important;
-}
-
-.course-user strong{
-  font-size:14px !important;
-}
-
-.course-user span{
-  font-size:11px !important;
-}
-
-.course-avatar,
-.certificate-float{
-  display:none !important;
-}
-
-.learning-ui{
-  min-height:auto !important;
-  padding-bottom:0 !important;
-}
-
-.course-window{
-  position:relative !important;
-  top:auto !important;
-  right:auto !important;
-  width:100% !important;
-  max-width:530px;
-  margin-left:auto;
-}
-
-.certificate-strip{
-  width:100%;
-  max-width:530px;
-  margin:14px 0 0 auto;
-  padding:15px 16px;
-  display:grid;
-  grid-template-columns:44px minmax(0,1fr) auto;
-  align-items:center;
-  gap:13px;
-  border:1px solid #ebe8f1;
-  border-radius:16px;
-  background:#fff;
-  box-shadow:0 12px 34px rgba(36,26,70,.07);
-}
-
-.certificate-strip-icon{
-  width:44px;
-  height:44px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:12px;
-  background:#f0ebff;
-  color:#7450e8;
-  font-size:16px;
-}
-
-.certificate-strip-copy{
-  min-width:0;
-}
-
-.certificate-strip-copy small{
-  display:block;
-  margin-bottom:3px;
-  font-size:8.5px;
-  font-weight:800;
-  letter-spacing:1.1px;
-  color:#aaa7b0;
-}
-
-.certificate-strip-copy strong{
-  display:block;
-  font-size:13px;
-  line-height:1.3;
-  color:#222228;
-}
-
-.certificate-strip-copy span{
-  display:block;
-  margin-top:3px;
-  font-size:10px;
-  line-height:1.4;
-  color:#8b8b94;
-  white-space:normal;
-}
-
-.certificate-strip-status{
-  display:flex;
-  align-items:center;
-  gap:5px;
-  padding:7px 9px;
-  border-radius:999px;
-  background:#f7f6f9;
-  color:#777780;
-  font-size:9.5px;
-  font-weight:700;
-  white-space:nowrap;
-}
-
-@media(max-width:600px){
-  .course-window,
-  .certificate-strip{
-    max-width:none;
-    margin-left:0;
-  }
-
-  .certificate-strip{
-    grid-template-columns:40px minmax(0,1fr);
-    padding:13px;
-  }
-
-  .certificate-strip-icon{
-    width:40px;
-    height:40px;
-  }
-
-  .certificate-strip-status{
-    grid-column:2;
-    width:max-content;
-    margin-top:3px;
-  }
-}
-
-
-
-
-/* =========================================================
-   NEW SECTION — WHAT STUDENTS TAKE FORWARD
-========================================================= */
-.take-forward{
-  background:#ffffff;
-  padding:110px 24px 118px;
-  border-top:1px solid #f0f0f3;
-}
-
-.take-forward-wrap{
-  width:min(1180px,100%);
-  margin:auto;
-  display:grid;
-  grid-template-columns:.88fr 1.12fr;
-  gap:86px;
-  align-items:start;
-}
-
-.take-forward-left{
-  position:sticky;
-  top:120px;
-}
-
-.take-forward-eyebrow{
-  display:flex;
-  align-items:center;
-  gap:10px;
-  margin-bottom:18px;
-  font-size:10.5px;
-  font-weight:800;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  color:#7450e8;
-}
-
-.take-forward-eyebrow::before{
-  content:"";
-  width:34px;
-  height:1px;
-  background:#7450e8;
-}
-
-.take-forward h2{
-  max-width:520px;
-  font-size:clamp(46px,5.8vw,78px);
-  line-height:.94;
-  letter-spacing:-4px;
-  font-weight:900;
-  color:#111116;
-}
-
-.take-forward h2 span{
-  display:block;
-  color:#7450e8;
-}
-
-.take-forward-left p{
-  max-width:480px;
-  margin-top:22px;
-  font-size:15px;
-  line-height:1.75;
-  color:#74747d;
-}
-
-.take-forward-link{
-  display:inline-flex;
-  align-items:center;
-  gap:9px;
-  margin-top:30px;
-  font-size:13px;
-  font-weight:800;
-  color:#17171d;
-}
-
-.take-forward-link span{
-  width:34px;
-  height:34px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  background:#f1edff;
-  color:#7450e8;
-}
-
-.take-forward-list{
-  border-top:1px solid #e9e8ed;
-}
-
-.forward-item{
-  display:grid;
-  grid-template-columns:70px 54px 1fr;
-  gap:18px;
-  align-items:start;
-  padding:34px 0;
-  border-bottom:1px solid #e9e8ed;
-  transition:.25s ease;
-}
-
-.forward-item:hover{
-  padding-left:10px;
-}
-
-.forward-no{
-  padding-top:8px;
-  font-size:11px;
-  font-weight:800;
-  letter-spacing:1.4px;
-  color:#aaa8b0;
-}
-
-.forward-icon{
-  width:48px;
-  height:48px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  border-radius:50%;
-  background:#f4f1ff;
-  color:#7450e8;
-  font-size:16px;
-}
-
-.forward-copy h3{
-  font-size:22px;
-  line-height:1.15;
-  letter-spacing:-.6px;
-  color:#1a1a20;
-  margin-bottom:8px;
-}
-
-.forward-copy p{
-  max-width:510px;
-  font-size:13.5px;
-  line-height:1.65;
-  color:#7c7c85;
-}
-
-.forward-meta{
-  margin-top:12px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:7px;
-}
-
-.forward-meta span{
-  font-size:10px;
-  font-weight:700;
-  color:#6f6f78;
-}
-
-.forward-meta span + span::before{
-  content:"•";
-  margin-right:7px;
-  color:#b5b2c0;
-}
-
-@media(max-width:900px){
-  .take-forward{
-    padding:82px 20px 90px;
-  }
-
-  .take-forward-wrap{
-    grid-template-columns:1fr;
-    gap:52px;
-  }
-
-  .take-forward-left{
-    position:static;
-  }
-
-  .take-forward h2{
-    max-width:680px;
-  }
-}
-
-@media(max-width:600px){
-  .take-forward{
-    padding:64px 18px 72px;
-  }
-
-  .take-forward h2{
-    font-size:44px;
-    letter-spacing:-2.8px;
-  }
-
-  .forward-item{
-    grid-template-columns:46px 1fr;
-    gap:14px;
-    padding:26px 0;
-  }
-
-  .forward-no{
-    display:none;
-  }
-
-  .forward-icon{
-    width:44px;
-    height:44px;
-    grid-row:1 / span 2;
-  }
-
-  .forward-copy h3{
-    font-size:19px;
-  }
-
-  .forward-copy p{
-    font-size:13px;
-  }
-
-  .forward-item:hover{
-    padding-left:0;
-  }
-}
-
-
-/* =========================================================
-   NEXT SECTION — CENTER MESSAGE + SIDE ICON MOTION
-========================================================= */
-.center-motion{
-  position:relative;
-  min-height:620px;
-  overflow:hidden;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:105px 24px;
-  background:linear-gradient(180deg,#faf9fe 0%,#ffffff 100%);
-  border-top:1px solid #f0eef5;
-}
-
-.center-motion::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image:
-    linear-gradient(rgba(116,80,232,.035) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(116,80,232,.035) 1px,transparent 1px);
-  background-size:64px 64px;
-  mask-image:linear-gradient(to bottom,transparent,black 25%,black 75%,transparent);
-  -webkit-mask-image:linear-gradient(to bottom,transparent,black 25%,black 75%,transparent);
-}
-
-.center-motion-copy{
-  position:relative;
-  z-index:5;
-  width:min(850px,92%);
-  text-align:center;
-}
-
-.center-motion-copy h2{
-  font-size:clamp(48px,6.8vw,92px);
-  line-height:.91;
-  letter-spacing:-5px;
-  font-weight:900;
-  color:#111116;
-}
-
-.center-motion-copy h2 span{
-  display:block;
-  margin-top:8px;
-  background:linear-gradient(90deg,#6d28d9,#805be5,#315fcc);
-  -webkit-background-clip:text;
-  background-clip:text;
-  -webkit-text-fill-color:transparent;
-}
-
-.center-motion-copy p{
-  max-width:650px;
-  margin:25px auto 0;
-  font-size:15px;
-  line-height:1.75;
-  color:#73737d;
-}
-
-.center-motion-action{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  margin-top:29px;
-  padding:13px 19px;
-  border-radius:11px;
-  background:#111116;
-  color:#fff;
-  font-size:13px;
-  font-weight:800;
-}
-
-.motion-icons{
-  position:absolute;
-  inset:0;
-  z-index:3;
-  pointer-events:none;
-}
-
-.motion-icon{
-  position:absolute;
-  top:50%;
-  left:50%;
-  width:var(--size);
-  height:var(--size);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  color:rgba(116,80,232,.38);
-  font-size:calc(var(--size) * .58);
-  opacity:0;
-  animation:sideToTopFall var(--time) cubic-bezier(.42,0,.25,1) var(--delay) infinite;
-  will-change:transform,opacity;
-}
-
-/* No icon card / no icon box */
-.motion-icon::before{
-  background:none !important;
-}
-
-.motion-icon:nth-child(3n){
-  color:rgba(49,95,204,.31);
-}
-
-.motion-icon:nth-child(4n){
-  color:rgba(18,18,24,.20);
-}
-
-@keyframes sideToTopFall{
-  0%{
-    opacity:0;
-    transform:
-      translate(calc(-50% + var(--start-x)),calc(-50% + var(--start-y)))
-      scale(.7)
-      rotate(0deg);
-  }
-
-  13%{
-    opacity:.78;
-  }
-
-  48%{
-    opacity:.82;
-    transform:
-      translate(calc(-50% + var(--top-x)),calc(-50% - 235px))
-      scale(1)
-      rotate(var(--rotate));
-  }
-
-  60%{
-    opacity:.78;
-    transform:
-      translate(calc(-50% + var(--top-x)),calc(-50% - 245px))
-      scale(1.04)
-      rotate(var(--rotate));
-  }
-
-  83%{
-    opacity:.48;
-    transform:
-      translate(calc(-50% + var(--fall-x)),calc(-50% + 135px))
-      scale(.88)
-      rotate(3deg);
-  }
-
-  100%{
-    opacity:0;
-    transform:
-      translate(calc(-50% + var(--fall-x)),calc(-50% + 245px))
-      scale(.68)
-      rotate(0deg);
-  }
-}
-
-@media(max-width:900px){
-  .center-motion{
-    min-height:570px;
-    padding:90px 20px;
-  }
-
-  .center-motion-copy h2{
-    font-size:clamp(47px,10vw,72px);
-    letter-spacing:-4px;
-  }
-
-  .motion-icon{
-    width:calc(var(--size) * .82);
-    height:calc(var(--size) * .82);
-    font-size:calc(var(--size) * .47);
-  }
-}
-
-@media(max-width:600px){
-  .center-motion{
-    min-height:540px;
-    padding:78px 18px;
-  }
-
-  .center-motion-copy{
-    width:94%;
-  }
-
-  .center-motion-copy h2{
-    font-size:44px;
-    letter-spacing:-2.8px;
-  }
-
-  .center-motion-copy p{
-    max-width:340px;
-    font-size:13.5px;
-  }
-
-  .motion-icon{
-    width:calc(var(--size) * .64);
-    height:calc(var(--size) * .64);
-    font-size:calc(var(--size) * .38);
-  }
-
-  .motion-icon:nth-child(n+9){
-    display:none;
-  }
-
-  @keyframes sideToTopFall{
-    0%{
-      opacity:0;
-      transform:translate(calc(-50% + var(--mobile-x)),calc(-50% + 180px)) scale(.7);
-    }
-    15%{opacity:.62}
-    52%{
-      opacity:.7;
-      transform:translate(calc(-50% + var(--mobile-top)),calc(-50% - 195px)) scale(1);
-    }
-    82%{
-      opacity:.42;
-      transform:translate(calc(-50% + var(--mobile-fall)),calc(-50% + 120px)) scale(.85);
-    }
-    100%{
-      opacity:0;
-      transform:translate(calc(-50% + var(--mobile-fall)),calc(-50% + 210px)) scale(.7);
-    }
-  }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+<title>CEZOO Product Dashboard</title>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--bg:#f5f7f7;--card:#fff;--text:#152019;--muted:#7c8a81;--line:#e6ebe8;--green:#0f8f4b;--green2:#087a3e;--soft:#edf7f1;--danger:#d83b32;--shadow:0 8px 30px rgba(23,48,34,.06)}
+html{scroll-behavior:auto} body{min-height:100vh;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;overflow-y:scroll}
+button,input,select{font:inherit}button{cursor:pointer}.app{min-height:100vh;display:grid;grid-template-columns:250px minmax(0,1fr)}
+.sidebar{position:sticky;top:0;height:100vh;background:linear-gradient(180deg,#f1fbf5 0%,#e7f7ee 100%);color:#153326;padding:22px 16px;display:flex;flex-direction:column;gap:22px;z-index:20;border-right:1px solid #d8eee1}
+.brand{display:flex;align-items:center;padding:4px 6px 18px;border-bottom:1px solid #d5eadc}.brand h1{font-family:"Bungee",sans-serif;font-size:27px;line-height:1;color:#10924f;letter-spacing:.2px;font-weight:400}
+.side-label{font-size:9px;text-transform:uppercase;letter-spacing:1.2px;color:#6c8d7b;padding:0 8px;margin-bottom:7px}.table-list{display:flex;flex-direction:column;gap:6px}
+.table-btn{width:100%;border:none;background:transparent;color:#426b57;display:flex;align-items:center;gap:10px;padding:11px 12px;border-radius:11px;text-align:left;font-size:12px;font-weight:750;transition:.16s}.table-btn i{width:18px;text-align:center}.table-btn:hover{background:#ffffff;color:#0f8f4b}.table-btn.active{background:#10924f;color:#fff;box-shadow:0 8px 20px rgba(16,146,79,.18)}.table-btn small{margin-left:auto;font-size:9px;color:inherit;opacity:.65}
+.side-note{margin-top:auto;padding:12px;border:1px solid #cfe6d8;border-radius:12px;color:#6d8b7a;font-size:10px;line-height:1.5;background:rgba(255,255,255,.58)}
+.main{min-width:0;padding:24px 26px 80px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px}.cezoo-wordmark{font-family:"Bungee",sans-serif;font-size:30px;line-height:1;color:#10924f;font-weight:400;letter-spacing:.2px}.active-pill{display:flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 13px;font-size:11px;font-weight:800;box-shadow:var(--shadow)}.dot{width:8px;height:8px;border-radius:50%;background:var(--green)}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin-bottom:16px}.stat{background:#fff;border:1px solid var(--line);border-radius:16px;padding:15px;box-shadow:var(--shadow);min-height:92px}.stat-head{display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:9px;font-weight:800;text-transform:uppercase}.stat-icon{width:29px;height:29px;border-radius:9px;background:#f2f5f3;display:grid;place-items:center;color:#54635a}.stat strong{display:block;font-size:25px;margin-top:10px;letter-spacing:-.7px}
+.toolbar{position:sticky;top:10px;z-index:15;background:rgba(245,247,247,.94);backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:16px;padding:10px;display:grid;grid-template-columns:minmax(220px,1fr) 175px 220px auto;gap:9px;margin-bottom:16px;box-shadow:0 7px 22px rgba(23,48,34,.05)}
+.search{position:relative}.search i{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:11px;color:#8a968f}.control{width:100%;height:42px;border:1px solid #dfe5e1;border-radius:11px;background:#fff;outline:none;padding:0 12px;font-size:11px}.search .control{padding-left:36px}.control:focus{border-color:#9bcbb0}.bulk-btn{height:42px;padding:0 15px;border:0;border-radius:11px;background:#102118;color:#fff;font-size:11px;font-weight:800}.bulk-btn:disabled{opacity:.35;cursor:not-allowed}
+.section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:13px 1px 11px}.section-head h3{font-size:15px}.section-head span{font-size:10px;color:var(--muted)}
+.grid-shell{min-height:560px;position:relative}.product-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.product-card{background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(25,49,35,.035);transition:.16s}.product-card:hover{transform:translateY(-1px);box-shadow:var(--shadow)}.product-card.selected{border-color:#4b9e6d;box-shadow:0 0 0 1px #4b9e6d}
+.card-top{padding:11px 11px 0;display:flex;align-items:center;justify-content:space-between}.check-wrap{display:flex;align-items:center;gap:7px;font-size:9px;color:var(--muted);font-weight:700}.pid{font-size:9px;color:#78857d;background:#f4f6f5;border-radius:7px;padding:5px 7px}
+.images{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:10px}.image-slot{position:relative;height:92px;border:1px solid #edf0ee;border-radius:11px;background:#fafcfb;overflow:hidden}.image-slot img{width:100%;height:100%;object-fit:contain;padding:5px}.img-empty{width:100%;height:100%;display:grid;place-items:center;color:#b4beb8;font-size:17px}.img-tag{position:absolute;left:5px;top:5px;background:rgba(16,33,24,.88);color:white;font-size:7px;font-weight:800;border-radius:5px;padding:3px 4px}.img-actions{position:absolute;left:4px;right:4px;bottom:4px}.img-btn{width:100%;height:28px;border:0;border-radius:7px;background:rgba(255,255,255,.96);font-size:8px;font-weight:800;color:#213128;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+.card-body{padding:3px 11px 12px}.name{font-size:12px;font-weight:800;line-height:1.35;min-height:33px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.category-badge{display:inline-flex;margin-top:7px;font-size:8px;font-weight:800;color:#31714b;background:#edf7f1;border-radius:6px;padding:4px 6px}.edit-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px;margin-top:10px}.field label{display:block;font-size:7.5px;color:#87938c;text-transform:uppercase;font-weight:800;margin-bottom:4px}.field input,.field select{width:100%;height:34px;border:1px solid #e0e5e2;border-radius:9px;padding:0 8px;background:#fff;outline:none;font-size:10px}.field.full{grid-column:1/-1}.field input:focus,.field select:focus{border-color:#9bcbb0}.card-actions{display:grid;grid-template-columns:1fr 38px;gap:7px;margin-top:9px}.save-btn,.delete-btn{height:36px;border-radius:9px;font-weight:800;font-size:10px}.save-btn{border:0;background:#102118;color:#fff}.save-btn.saved{background:#eaf6ee;color:#17723b}.delete-btn{border:1px solid #f0d1ce;background:#fff;color:var(--danger)}
+.loading-layer{position:absolute;inset:0;background:rgba(245,247,247,.82);backdrop-filter:blur(2px);z-index:8;display:none;padding-top:4px}.loading-layer.show{display:block}.skeleton-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.skeleton{height:410px;border-radius:16px;background:linear-gradient(90deg,#edf0ee 25%,#f8f9f8 37%,#edf0ee 63%);background-size:400% 100%;animation:shimmer 1.25s infinite}@keyframes shimmer{0%{background-position:100% 0}100%{background-position:0 0}}
+.more-wrap{height:70px;display:flex;align-items:center;justify-content:center;color:#7d8b82;font-size:10px}.spinner{width:17px;height:17px;border:2px solid #dce4df;border-top-color:#102118;border-radius:50%;animation:spin .7s linear infinite;margin-right:8px}@keyframes spin{to{transform:rotate(360deg)}}.empty{display:none;padding:80px 20px;text-align:center;color:#8b978f}.empty i{font-size:28px;margin-bottom:10px}.empty h4{font-size:14px;color:#536158;margin-bottom:5px}.empty p{font-size:10px}
+.toast-wrap{position:fixed;right:18px;bottom:18px;z-index:9999;display:flex;flex-direction:column;gap:8px}.toast{min-width:240px;max-width:360px;padding:11px 13px;border-radius:11px;background:#102118;color:#fff;box-shadow:0 12px 35px rgba(0,0,0,.2);font-size:10px;display:flex;gap:8px;align-items:center}.toast.error{background:#b82e27}.toast.warn{background:#795f17}
+.modal{position:fixed;inset:0;background:rgba(8,20,13,.32);display:none;align-items:center;justify-content:center;padding:18px;z-index:9998;backdrop-filter:blur(4px)}.modal.show{display:flex}.modal-box{width:min(390px,100%);background:#fff;border-radius:18px;padding:20px;box-shadow:0 25px 80px rgba(0,0,0,.25)}.modal-box h3{font-size:17px}.modal-box p{font-size:10px;color:#78857d;line-height:1.55;margin-top:7px}.modal-name{margin-top:12px;padding:10px;border-radius:9px;background:#f6f8f7;font-size:11px;font-weight:800}.modal-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.modal-actions button{height:40px;border-radius:10px;font-size:11px;font-weight:800}.cancel{border:1px solid #dfe5e1;background:#fff}.danger{border:0;background:var(--danger);color:#fff}
+@media(max-width:1200px){.product-grid,.skeleton-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.toolbar{grid-template-columns:minmax(220px,1fr) 160px 200px auto}}
+@media(max-width:920px){.app{grid-template-columns:1fr}.sidebar{position:relative;height:auto;padding:13px}.brand{padding-bottom:10px}.table-list{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));overflow-x:auto}.table-btn{white-space:nowrap}.side-note{display:none}.main{padding:16px 12px 70px}.toolbar{top:5px;grid-template-columns:1fr 150px}.toolbar .bulk-select,.toolbar .bulk-btn{display:none}.product-grid,.skeleton-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:560px){.stats{grid-template-columns:repeat(2,1fr)}.product-grid,.skeleton-grid{grid-template-columns:1fr}.images{grid-template-columns:repeat(3,1fr)}.image-slot{height:105px}.toolbar{grid-template-columns:1fr}.toolbar .status{display:none}.topbar{align-items:center}.cezoo-wordmark{font-size:25px}.active-pill{padding:8px 10px}.main{padding-top:14px}}
+
+.mobile-menu-btn{display:none;width:44px;height:44px;border:1px solid #dcebe2;border-radius:14px;background:#fff;color:#159251;align-items:center;justify-content:center;font-size:18px;box-shadow:0 8px 24px rgba(26,88,53,.10)}
+.mobile-overlay{display:none}
+@media(max-width:920px){
+  body.mobile-nav-open{overflow:hidden}
+  .app{display:block}
+  .sidebar{position:fixed;left:0;top:0;width:min(82vw,300px);height:100vh;padding:76px 14px 18px;transform:translateX(-105%);transition:transform .25s ease;z-index:1002;box-shadow:18px 0 50px rgba(8,45,26,.14)}
+  body.mobile-nav-open .sidebar{transform:translateX(0)}
+  .sidebar .brand{display:none}
+  .table-list{display:flex;flex-direction:column;overflow:visible;gap:7px}
+  .table-btn{min-width:0;width:100%;white-space:normal;background:rgba(255,255,255,.62);color:#3b6651}
+  .table-btn:hover{background:#fff;color:#0f8f4b}
+  .side-note{display:block;color:#65806f;border-color:#cfe6d8;background:rgba(255,255,255,.62)}
+  .mobile-menu-btn{display:inline-flex;position:fixed;left:12px;top:12px;z-index:1004;flex:0 0 auto}
+  .mobile-overlay{position:fixed;inset:0;background:rgba(8,32,19,.28);backdrop-filter:blur(2px);z-index:1001}
+  body.mobile-nav-open .mobile-overlay{display:block}
+  .topbar{align-items:center;position:sticky;top:0;z-index:1000;background:rgba(245,247,247,.96);backdrop-filter:blur(14px);margin:-16px -12px 14px;padding:12px 12px 12px 66px;border-bottom:1px solid #e4ece7}
+}
+@media(max-width:560px){
+  .main{padding:12px 10px 72px}
+  .topbar{gap:9px;margin-bottom:12px}
+  .cezoo-wordmark{font-size:24px;min-width:0;flex:1}
+  .active-pill{max-width:42%;font-size:9px;padding:8px 9px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .stats{gap:8px;margin-bottom:10px}.stat{min-height:78px;padding:11px;border-radius:13px}.stat strong{font-size:21px;margin-top:7px}
+  .toolbar{padding:8px;border-radius:13px;margin-bottom:11px}.control{height:40px}.search .control{padding-left:34px}
+  .section-head{margin:9px 1px}.section-head h3{font-size:14px}.section-head span{font-size:9px}
+  .product-grid,.skeleton-grid{grid-template-columns:1fr;gap:10px}.product-card{border-radius:14px}
+  .images{gap:5px;padding:8px}.image-slot{height:96px}
+  .card-body{padding:3px 9px 10px}.edit-grid{gap:6px}.field input,.field select{height:38px;font-size:11px}.field label{font-size:8px}
+  .save-btn,.delete-btn{height:40px}.card-actions{grid-template-columns:1fr 44px}
+  .toast-wrap{left:10px;right:10px;bottom:12px}.toast{min-width:0;max-width:none;width:100%}
 }
 
 </style>
 </head>
-
 <body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><h1>CEZOO</h1></div>
+    <div><div class="side-label">Product tables</div><div class="table-list" id="tableList"></div></div>
+    <div class="side-note">Select a table to manage its products. Switching tables does not refresh the page or change your scroll position.</div>
+  </aside>
 
-<nav class="navbar">
-
-  <a href="#" class="logo">
-    <span class="logo-main">TRIVOX</span>
-    <span class="logo-impact">AI IMPACT</span>
-  </a>
-
-  <ul class="nav-menu" id="navMenu">
-
-    <li class="nav-item has-dropdown">
-      <div class="nav-link">
-        Company
-        <span class="arrow"></span>
-      </div>
-
-      <div class="dropdown">
-        <a href="#">About TRIVOX</a>
-        <a href="#">Our Mission</a>
-        <a href="#">Our Vision</a>
-        <a href="#">Leadership</a>
-        <a href="#">Our Team</a>
-        <a href="#">Partners</a>
-        <a href="#">Impact</a>
-      </div>
-    </li>
-
-    <li class="nav-item has-dropdown">
-      <div class="nav-link">
-        Learning
-        <span class="arrow"></span>
-      </div>
-
-      <div class="dropdown mega-dropdown">
-
-        <a href="#" class="mega-box">
-          <strong>AI Learning</strong>
-          <p>Learn AI concepts, tools and real-world applications.</p>
-        </a>
-
-        <a href="#" class="mega-box">
-          <strong>Programming</strong>
-          <p>Build strong coding and problem-solving skills.</p>
-        </a>
-
-        <a href="#" class="mega-box">
-          <strong>Web Development</strong>
-          <p>Build responsive modern websites.</p>
-        </a>
-
-        <a href="#" class="mega-box">
-          <strong>App Development</strong>
-          <p>Learn modern application development.</p>
-        </a>
-
-        <a href="#" class="mega-box">
-          <strong>Data Science</strong>
-          <p>Explore analytics and intelligent data.</p>
-        </a>
-
-        <a href="#" class="mega-box">
-          <strong>Cyber Security</strong>
-          <p>Understand security concepts and practices.</p>
-        </a>
-
-      </div>
-    </li>
-
-    <li class="nav-item has-dropdown">
-      <div class="nav-link">
-        Programs
-        <span class="arrow"></span>
-      </div>
-
-      <div class="dropdown">
-        <a href="#">Student Programs</a>
-        <a href="#">College Programs</a>
-        <a href="#">Internships</a>
-        <a href="#">Workshops</a>
-        <a href="#">Bootcamps</a>
-        <a href="#">Career Programs</a>
-        <a href="#">Certification Programs</a>
-      </div>
-    </li>
-
-    <li class="nav-item has-dropdown">
-      <div class="nav-link">
-        Solutions
-        <span class="arrow"></span>
-      </div>
-
-      <div class="dropdown mega-dropdown">
-
-        <a href="#" class="mega-box">
-          <strong>For Students</strong>
-          <p>Skills, projects and career support.</p>
-        </a>
-
-        <a href="#" class="mega-box">
-          <strong>For Colleges</strong>
-          <p>Industry-ready learning programs.</p>
-        </a>
-
-        <a href="#" class="mega-box">
-          <strong>For Schools</strong>
-          <p>Modern technology and AI learning.</p>
-        </a>
-
-        <a href="#" class="mega-box">
-          <strong>For Companies</strong>
-          <p>Training and technology solutions.</p>
-        </a>
-
-      </div>
-    </li>
-
-    <li class="nav-item has-dropdown">
-      <div class="nav-link">
-        Resources
-        <span class="arrow"></span>
-      </div>
-
-      <div class="dropdown">
-        <a href="#">Blogs</a>
-        <a href="#">Tutorials</a>
-        <a href="#">Learning Resources</a>
-        <a href="#">Student Projects</a>
-        <a href="#">Success Stories</a>
-        <a href="#">Events</a>
-        <a href="#">FAQs</a>
-      </div>
-    </li>
-
-    <li class="nav-item has-dropdown">
-      <div class="nav-link">
-        Careers
-        <span class="arrow"></span>
-      </div>
-
-      <div class="dropdown">
-        <a href="#">Open Positions</a>
-        <a href="#">Internships</a>
-        <a href="#">Campus Hiring</a>
-        <a href="#">Join Our Team</a>
-        <a href="#">Life at TRIVOX</a>
-      </div>
-    </li>
-
-    <li class="nav-item">
-      <a href="#" class="nav-link">Contact</a>
-    </li>
-
-  </ul>
-
-  <div class="nav-actions">
-
-    <a href="#" class="login-btn">
-      Sign In
-    </a>
-
-    <a href="#" class="get-started">
-      Get Started
-    </a>
-
-    <button
-      class="menu-toggle"
-      id="menuToggle"
-    >
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-
-  </div>
-
-</nav>
-
-<section class="hero">
-
-  <div class="hero-content">
-
-    <div class="text-icon-layer" aria-hidden="true">
-      <i class="fa-solid fa-code text-fall-icon" style="--big:54px;--left:7%;--top:58%;"></i>
-      <i class="fa-solid fa-laptop-code text-fall-icon" style="--big:62px;--left:15%;--top:20%;"></i>
-      <i class="fa-solid fa-brain text-fall-icon" style="--big:58px;--left:26%;--top:8%;"></i>
-      <i class="fa-solid fa-microchip text-fall-icon" style="--big:50px;--left:35%;--top:70%;"></i>
-      <i class="fa-solid fa-robot text-fall-icon" style="--big:66px;--left:60%;--top:7%;"></i>
-      <i class="fa-solid fa-lightbulb text-fall-icon" style="--big:55px;--left:70%;--top:65%;"></i>
-      <i class="fa-solid fa-gears text-fall-icon" style="--big:60px;--left:79%;--top:18%;"></i>
-      <i class="fa-solid fa-database text-fall-icon" style="--big:52px;--left:90%;--top:58%;"></i>
-      <i class="fa-solid fa-cloud text-fall-icon" style="--big:58px;--left:4%;--top:12%;"></i>
-      <i class="fa-solid fa-terminal text-fall-icon" style="--big:53px;--left:88%;--top:5%;"></i>
+  <main class="main">
+    <div class="topbar">
+      <button id="mobileMenuBtn" class="mobile-menu-btn" type="button" aria-label="Open product tables"><i class="fa-solid fa-bars"></i></button>
+      <div class="cezoo-wordmark">CEZOO</div>
+      <div class="active-pill"><span class="dot"></span><span id="activeTableLabel">CEZOO Groceries</span></div>
     </div>
 
+    <section class="stats">
+      <div class="stat"><div class="stat-head"><span>Total products</span><span class="stat-icon"><i class="fa-solid fa-boxes-stacked"></i></span></div><strong id="totalCount">0</strong></div>
+      <div class="stat"><div class="stat-head"><span>Categorized</span><span class="stat-icon"><i class="fa-solid fa-layer-group"></i></span></div><strong id="categorizedCount">0</strong></div>
+      <div class="stat"><div class="stat-head"><span>Loaded</span><span class="stat-icon"><i class="fa-solid fa-table-cells"></i></span></div><strong id="loadedCount">0</strong></div>
+      <div class="stat"><div class="stat-head"><span>Selected</span><span class="stat-icon"><i class="fa-solid fa-list-check"></i></span></div><strong id="selectedCount">0</strong></div>
+    </section>
 
-    <h1 class="hero-title">
+    <section class="toolbar">
+      <div class="search"><i class="fa-solid fa-magnifying-glass"></i><input id="searchInput" class="control" type="search" placeholder="Search product name..." autocomplete="off" /></div>
+      <select id="statusFilter" class="control status"><option value="all">All products</option><option value="pending">Uncategorized</option><option value="done">Categorized</option></select>
+      <select id="bulkCategory" class="control bulk-select"><option value="">Bulk category...</option></select>
+      <button id="bulkApply" class="bulk-btn" disabled>Apply to selected</button>
+    </section>
 
-      <span>
-        Don’t just learn.
-      </span>
-
-      <span class="impact">
-        Make an impact.
-      </span>
-
-    </h1>
-
-    <p class="hero-description">
-      Explore technology, build meaningful projects and turn your skills into real-world impact with TRIVOX AI IMPACT.
-    </p>
-
-    <div class="hero-actions">
-
-      <a href="#" class="hero-btn explore-btn">
-        Explore TRIVOX
-      </a>
-
-      <a href="#" class="hero-btn program-btn">
-        View Programs
-      </a>
-
+    <div class="section-head"><h3 id="productsTitle">CEZOO Groceries</h3><span id="showingText">Loading products...</span></div>
+    <div class="grid-shell">
+      <div id="productGrid" class="product-grid"></div>
+      <div id="loadingLayer" class="loading-layer"><div class="skeleton-grid"><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div><div class="skeleton"></div></div></div>
+      <div id="emptyState" class="empty"><i class="fa-regular fa-folder-open"></i><h4>No products found</h4><p>Try another search or filter.</p></div>
     </div>
-
-  </div>
-
-</section>
-
-
-<section class="showcase">
-
-  <div class="showcase-head">
-    <p>Explore what we build</p>
-    <h2>Ideas moving into impact.</h2>
-  </div>
-
-  <!-- ROW 1 — 9 IMAGES — MOVES RIGHT -->
-  <div class="marquee-row marquee-right">
-    <div class="marquee-track">
-
-      <div class="marquee-group">
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85" alt="Technology workspace"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=85" alt="Students learning together"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=85" alt="Programming code"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=85" alt="Team collaboration"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=85" alt="Developer working"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=85" alt="Project planning"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=85" alt="Creative team meeting"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=85" alt="Team at work"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=85" alt="Laptop development"></div>
-      </div>
-
-      <!-- EXACT DUPLICATE FOR SEAMLESS LOOP -->
-      <div class="marquee-group" aria-hidden="true">
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1515879218367-8466d910aaa4?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=85" alt=""></div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ROW 2 — 9 IMAGES — MOVES LEFT -->
-  <div class="marquee-row marquee-left">
-    <div class="marquee-track">
-
-      <div class="marquee-group">
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=900&q=85" alt="Coding setup"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=85" alt="Technology team"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=900&q=85" alt="Modern laptop"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=85" alt="Office collaboration"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85" alt="Students studying"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85" alt="Team project"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=85" alt="Learning environment"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=85" alt="Focused learning"></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=900&q=85" alt="Digital learning"></div>
-      </div>
-
-      <!-- EXACT DUPLICATE FOR SEAMLESS LOOP -->
-      <div class="marquee-group" aria-hidden="true">
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1484417894907-623942c8ee29?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1531297484001-80022131f5a1?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1434030216411-0b793f4b4173?auto=format&fit=crop&w=900&q=85" alt=""></div>
-        <div class="marquee-card"><img src="https://images.unsplash.com/photo-1516321165247-4aa89a48be28?auto=format&fit=crop&w=900&q=85" alt=""></div>
-      </div>
-
-    </div>
-  </div>
-
-</section>
-
-
-
-<section class="trivox-model" id="how-it-works">
-  <div class="model-wrap">
-
-    <div class="model-head">
-<h2>Learn more from what<br><span>you already spend on.</span></h2>
-      <p>
-        Eligible monthly purchases can unlock learning benefits inside TRIVOX —
-        combining everyday value with courses, quizzes, progress and certificates.
-      </p>
-    </div>
-
-    <div class="model-flow">
-
-      <article class="model-item">
-        <div class="model-no">
-          <span>01</span>
-          <span class="model-icon"><i class="fa-solid fa-bag-shopping"></i></span>
-        </div>
-        <h3>Make an eligible purchase</h3>
-        <p>Shop eligible products or services through participating TRIVOX partners.</p>
-      </article>
-
-      <article class="model-item">
-        <div class="model-no">
-          <span>02</span>
-          <span class="model-icon"><i class="fa-solid fa-tags"></i></span>
-        </div>
-        <h3>Get partner benefits</h3>
-        <p>Access applicable discounts and purchase benefits from participating partners.</p>
-      </article>
-
-      <article class="model-item">
-        <div class="model-no">
-          <span>03</span>
-          <span class="model-icon"><i class="fa-solid fa-graduation-cap"></i></span>
-        </div>
-        <h3>Unlock your learning</h3>
-        <p>Eligible monthly activity keeps your TRIVOX course or learning module accessible.</p>
-      </article>
-
-      <article class="model-item">
-        <div class="model-no">
-          <span>04</span>
-          <span class="model-icon"><i class="fa-solid fa-list-check"></i></span>
-        </div>
-        <h3>Learn & complete</h3>
-        <p>Finish lessons, slides, quizzes and assignments while your progress is tracked.</p>
-      </article>
-
-      <article class="model-item">
-        <div class="model-no">
-          <span>05</span>
-          <span class="model-icon"><i class="fa-solid fa-award"></i></span>
-        </div>
-        <h3>Earn your certificate</h3>
-        <p>Complete the required learning conditions and move forward to your next module.</p>
-      </article>
-
-    </div>
-
-    <div class="model-note">
-      <p><strong>One connected experience:</strong> eligible purchases → benefits → learning → completion → certificate.</p>
-      <a href="#" class="model-btn">Explore TRIVOX</a>
-    </div>
-
-  </div>
-</section>
-
-
-<section class="learning-experience">
-  <div class="learning-wrap">
-
-    <div class="learning-copy">
-      <h2>Your learning,<br><span>always moving.</span></h2>
-      <p>
-        Learn in focused modules, keep track of your progress and complete each
-        stage with quizzes, assignments and certificates — all inside one experience.
-      </p>
-
-      <div class="learning-points">
-        <div class="learning-point">
-          <i class="fa-solid fa-play"></i>
-          <div>
-            <strong>Short, focused learning</strong>
-            <p>Lessons and modules designed to keep learning clear and practical.</p>
-          </div>
-        </div>
-
-        <div class="learning-point">
-          <i class="fa-solid fa-chart-simple"></i>
-          <div>
-            <strong>Progress that stays visible</strong>
-            <p>See completed lessons, pending activities and overall course progress.</p>
-          </div>
-        </div>
-
-        <div class="learning-point">
-          <i class="fa-solid fa-certificate"></i>
-          <div>
-            <strong>Complete. Prove. Progress.</strong>
-            <p>Finish required learning and earn certificates as you move forward.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="learning-ui">
-
-      <div class="course-window">
-        <div class="course-top">
-          <div class="course-user">
-<div>
-              <strong>My Learning</strong>
-              <span>Continue where you left off</span>
-            </div>
-          </div>
-          <div class="course-percent">68%</div>
-        </div>
-
-        <div class="course-hero">
-          <div>
-            <small>Current learning module</small>
-            <h3>AI Foundations & Real-World Applications</h3>
-          </div>
-          <div class="course-progress"><span></span></div>
-        </div>
-
-        <div class="course-lessons">
-          <div class="course-mini">
-            <i class="fa-solid fa-book-open"></i>
-            <strong>Lessons</strong>
-            <span>8 of 12 lessons completed</span>
-          </div>
-          <div class="course-mini">
-            <i class="fa-solid fa-list-check"></i>
-            <strong>Quiz</strong>
-            <span>Quiz ready to continue</span>
-          </div>
-        </div>
-      </div>
-      <div class="certificate-strip">
-        <div class="certificate-strip-icon">
-          <i class="fa-solid fa-award"></i>
-        </div>
-
-        <div class="certificate-strip-copy">
-          <small>NEXT MILESTONE</small>
-          <strong>Course Certificate</strong>
-          <span>Complete the remaining lessons and quiz to unlock it.</span>
-        </div>
-
-        <div class="certificate-strip-status">
-          <i class="fa-solid fa-lock"></i>
-          Locked
-        </div>
-      </div>
-
-    </div>
-
-  </div>
-</section>
-
-
-
-<section class="take-forward">
-  <div class="take-forward-wrap">
-
-    <div class="take-forward-left">
-      
-
-      <h2>
-        Learning that stays
-        <span>with you.</span>
-      </h2>
-
-      <p>
-        TRIVOX is designed so every completed module adds something useful —
-        knowledge, proof of progress, practical experience and a clearer next step.
-      </p>
-
-      <a href="#" class="take-forward-link">
-        See the student journey
-        <span><i class="fa-solid fa-arrow-right"></i></span>
-      </a>
-    </div>
-
-    <div class="take-forward-list">
-
-      <article class="forward-item">
-        <div class="forward-no">01</div>
-
-        <div class="forward-icon">
-          <i class="fa-solid fa-book-open-reader"></i>
-        </div>
-
-        <div class="forward-copy">
-          <h3>Knowledge you can build on</h3>
-          <p>
-            Every module adds a focused layer of learning, helping students move
-            from basics to more advanced topics without losing continuity.
-          </p>
-
-          <div class="forward-meta">
-            <span>Lessons</span>
-            <span>Modules</span>
-            <span>Progress</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="forward-item">
-        <div class="forward-no">02</div>
-
-        <div class="forward-icon">
-          <i class="fa-solid fa-laptop-code"></i>
-        </div>
-
-        <div class="forward-copy">
-          <h3>Practical experience, not just theory</h3>
-          <p>
-            Students can apply what they learn through tasks, projects and guided
-            activities that turn concepts into something they can actually use.
-          </p>
-
-          <div class="forward-meta">
-            <span>Projects</span>
-            <span>Assignments</span>
-            <span>Practice</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="forward-item">
-        <div class="forward-no">03</div>
-
-        <div class="forward-icon">
-          <i class="fa-solid fa-award"></i>
-        </div>
-
-        <div class="forward-copy">
-          <h3>Proof of what you completed</h3>
-          <p>
-            Completed learning stages can lead to certificates and milestones
-            that make student progress visible and easier to showcase.
-          </p>
-
-          <div class="forward-meta">
-            <span>Certificates</span>
-            <span>Milestones</span>
-            <span>Achievements</span>
-          </div>
-        </div>
-      </article>
-
-      <article class="forward-item">
-        <div class="forward-no">04</div>
-
-        <div class="forward-icon">
-          <i class="fa-solid fa-route"></i>
-        </div>
-
-        <div class="forward-copy">
-          <h3>A clearer path to what comes next</h3>
-          <p>
-            TRIVOX connects one completed step to the next, helping students
-            continue learning instead of stopping after a single course.
-          </p>
-
-          <div class="forward-meta">
-            <span>Next Module</span>
-            <span>Skill Growth</span>
-            <span>Long-term Learning</span>
-          </div>
-        </div>
-      </article>
-
-    </div>
-
-  </div>
-</section>
-
-
-<section class="center-motion">
-
-  <div class="motion-icons" aria-hidden="true">
-
-    <i class="fa-solid fa-code motion-icon"
-       style="--size:52px;--time:7.4s;--delay:-.8s;--start-x:-620px;--start-y:30px;--top-x:-310px;--fall-x:-390px;--rotate:-13deg;--mobile-x:-230px;--mobile-top:-125px;--mobile-fall:-165px;"></i>
-
-    <i class="fa-solid fa-brain motion-icon"
-       style="--size:58px;--time:8.1s;--delay:-4.1s;--start-x:610px;--start-y:65px;--top-x:300px;--fall-x:380px;--rotate:11deg;--mobile-x:225px;--mobile-top:120px;--mobile-fall:155px;"></i>
-
-    <i class="fa-solid fa-laptop-code motion-icon"
-       style="--size:55px;--time:7.8s;--delay:-2.7s;--start-x:-570px;--start-y:180px;--top-x:-155px;--fall-x:-275px;--rotate:8deg;--mobile-x:-215px;--mobile-top:-65px;--mobile-fall:-130px;"></i>
-
-    <i class="fa-solid fa-lightbulb motion-icon"
-       style="--size:48px;--time:8.5s;--delay:-6.2s;--start-x:590px;--start-y:185px;--top-x:145px;--fall-x:280px;--rotate:-10deg;--mobile-x:220px;--mobile-top:60px;--mobile-fall:130px;"></i>
-
-    <i class="fa-solid fa-graduation-cap motion-icon"
-       style="--size:60px;--time:8.3s;--delay:-3.4s;--start-x:-660px;--start-y:-85px;--top-x:-55px;--fall-x:-185px;--rotate:-8deg;--mobile-x:-235px;--mobile-top:-20px;--mobile-fall:-90px;"></i>
-
-    <i class="fa-solid fa-microchip motion-icon"
-       style="--size:49px;--time:7.6s;--delay:-5.2s;--start-x:650px;--start-y:-70px;--top-x:60px;--fall-x:190px;--rotate:12deg;--mobile-x:230px;--mobile-top:25px;--mobile-fall:95px;"></i>
-
-    <i class="fa-solid fa-award motion-icon"
-       style="--size:54px;--time:8.7s;--delay:-7.1s;--start-x:-520px;--start-y:265px;--top-x:-235px;--fall-x:-310px;--rotate:10deg;--mobile-x:-200px;--mobile-top:-95px;--mobile-fall:-145px;"></i>
-
-    <i class="fa-solid fa-chart-line motion-icon"
-       style="--size:50px;--time:7.9s;--delay:-1.9s;--start-x:535px;--start-y:275px;--top-x:225px;--fall-x:315px;--rotate:-12deg;--mobile-x:205px;--mobile-top:90px;--mobile-fall:145px;"></i>
-
-    <i class="fa-solid fa-robot motion-icon"
-       style="--size:57px;--time:8.6s;--delay:-4.8s;--start-x:-680px;--start-y:95px;--top-x:-410px;--fall-x:-470px;--rotate:9deg;--mobile-x:-240px;--mobile-top:-145px;--mobile-fall:-185px;"></i>
-
-    <i class="fa-solid fa-database motion-icon"
-       style="--size:48px;--time:8s;--delay:-6.8s;--start-x:675px;--start-y:115px;--top-x:405px;--fall-x:465px;--rotate:-9deg;--mobile-x:240px;--mobile-top:145px;--mobile-fall:185px;"></i>
-
-  </div>
-
-  <div class="center-motion-copy">
-    <h2>
-      One step today.
-      <span>A stronger skill tomorrow.</span>
-    </h2>
-
-    <p>
-      Keep learning, completing and moving forward. TRIVOX connects each
-      learning milestone to the next so progress never feels disconnected.
-    </p>
-
-    <a href="#" class="center-motion-action">Start exploring</a>
-  </div>
-
-</section>
-
-
-
-
-
-
+    <div id="moreWrap" class="more-wrap"></div>
+  </main>
+</div>
+
+<div id="toastWrap" class="toast-wrap"></div>
+<div id="deleteModal" class="modal"><div class="modal-box"><h3>Delete product?</h3><p>This permanently deletes this product from the selected database table. Product storage images are removed where possible.</p><div id="modalName" class="modal-name"></div><div class="modal-actions"><button id="cancelDelete" class="cancel">Cancel</button><button id="confirmDelete" class="danger">Delete product</button></div></div></div>
 
 <script>
+const SUPABASE_URL = "https://ycqwdeiykbkfmmlpgdzd.supabase.co";
+const SUPABASE_KEY = "sb_publishable_-4RzQVudUy_VsvSpHTxNfg_hrdsQW0j";
+const BUCKET = "product-images";
+const sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-  const menuToggle =
-    document.getElementById("menuToggle");
+// EXACT 5 TABLES USED BY THIS DASHBOARD
+const PRODUCT_TABLES = [
+  {name:"cezoogroceries", label:"CEZOO Groceries", icon:"fa-basket-shopping"},
+  {name:"fresh_products", label:"Fresh Products", icon:"fa-carrot"},
+  {name:"icecreams", label:"Ice Creams", icon:"fa-ice-cream"},
+  {name:"cakes", label:"Cakes", icon:"fa-cake-candles"},
+  {name:"cezoocafe", label:"CEZOO Cafe", icon:"fa-mug-hot"}
+];
+const CATEGORIES = ["Groceries","Fresh Fruits","Fresh Vegetables","Oils","Masalas","Cleaning Essentials","Biscuits & Lays","Gift Items","Dry Fruits","Breakfast Cereals","Pooja Items","Drinks","Biscuits & Namkeen","Makhana","Chocolates","Soaps","Skin Care","Stationery","Ice Creams","Cakes","Cafe","Others"];
+const PAGE_SIZE = 24;
 
-  const navMenu =
-    document.getElementById("navMenu");
+let activeTable = PRODUCT_TABLES[0].name;
+let products = [];
+let selectedIds = new Set();
+let currentPage = 0;
+let hasMore = true;
+let loading = false;
+let search = "";
+let status = "all";
+let requestToken = 0;
+let searchTimer = null;
+let deleteTarget = null;
 
-  const dropdownItems =
-    document.querySelectorAll(".has-dropdown");
+const $ = id => document.getElementById(id);
+const tableList = $("tableList"), productGrid=$("productGrid"), loadingLayer=$("loadingLayer"), emptyState=$("emptyState"), moreWrap=$("moreWrap");
+const totalCount=$("totalCount"), categorizedCount=$("categorizedCount"), loadedCount=$("loadedCount"), selectedCount=$("selectedCount"), showingText=$("showingText");
+const activeTableLabel=$("activeTableLabel"), productsTitle=$("productsTitle"), searchInput=$("searchInput"), statusFilter=$("statusFilter"), bulkCategory=$("bulkCategory"), bulkApply=$("bulkApply");
 
-  menuToggle.addEventListener(
-    "click",
-    () => {
-      navMenu.classList.toggle("active");
+function esc(v){return String(v??"").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll('"',"&quot;").replaceAll("'","&#039;")}
+function toast(msg,type="ok"){const e=document.createElement("div");e.className=`toast ${type==="error"?"error":type==="warn"?"warn":""}`;e.innerHTML=`<i class="fa-solid ${type==="error"?"fa-circle-exclamation":"fa-circle-check"}"></i><span>${esc(msg)}</span>`;$("toastWrap").appendChild(e);setTimeout(()=>e.remove(),2800)}
+function tableMeta(){return PRODUCT_TABLES.find(t=>t.name===activeTable)||PRODUCT_TABLES[0]}
+function fieldExists(product,key){return Object.prototype.hasOwnProperty.call(product,key)}
+function priceValue(product,key){return fieldExists(product,key)?product[key]:""}
+function productDisplayName(product){return product.name??product.product_name??product.item_name??product.food_name??product.title??`Product #${product.id??""}`}
+
+function buildSidebar(){tableList.innerHTML=PRODUCT_TABLES.map(t=>`<button type="button" class="table-btn ${t.name===activeTable?"active":""}" data-table="${t.name}"><i class="fa-solid ${t.icon}"></i><span>${esc(t.label)}</span></button>`).join("");}
+function buildCategories(){bulkCategory.innerHTML=`<option value="">Bulk category...</option>`+CATEGORIES.map(c=>`<option value="${esc(c)}">${esc(c)}</option>`).join("")}
+function categoryOptions(value){return `<option value="">No category</option>`+CATEGORIES.map(c=>`<option value="${esc(c)}" ${c===value?"selected":""}>${esc(c)}</option>`).join("")}
+
+function getImageURL(value){if(!value)return"";let v=String(value).trim();if(/^https?:\/\//i.test(v)||v.startsWith("data:"))return v;v=v.replace(/^\/+/,"");if(v.startsWith(BUCKET+"/"))v=v.slice(BUCKET.length+1);return sb.storage.from(BUCKET).getPublicUrl(v).data?.publicUrl||""}
+function getStoragePath(value){if(!value)return null;let v=String(value).trim();if(!v||v.startsWith("data:"))return null;if(/^https?:\/\//i.test(v)){try{const u=new URL(v);const marker=`/storage/v1/object/public/${BUCKET}/`;if(!u.pathname.includes(marker))return null;return decodeURIComponent(u.pathname.split(marker)[1])}catch{return null}}v=v.replace(/^\/+/,"");if(v.startsWith(BUCKET+"/"))v=v.slice(BUCKET.length+1);return v||null}
+
+function showMainLoading(show){loadingLayer.classList.toggle("show",show)}
+function updateSelectedUI(){selectedCount.textContent=selectedIds.size;bulkApply.disabled=!selectedIds.size||!bulkCategory.value}
+function updateLoadedUI(){loadedCount.textContent=products.length;showingText.textContent=`${products.length.toLocaleString()} loaded from ${tableMeta().label}`;updateSelectedUI()}
+
+async function loadStats(token=requestToken){
+  try{
+    const totalRes=await sb.from(activeTable).select("id",{count:"exact",head:true});
+    if(token!==requestToken)return;
+    if(totalRes.error)throw totalRes.error;
+    totalCount.textContent=(totalRes.count||0).toLocaleString();
+    // category may not exist on a table; handle without breaking product load
+    const catRes=await sb.from(activeTable).select("id",{count:"exact",head:true}).not("category","is",null).neq("category","");
+    if(token!==requestToken)return;
+    if(catRes.error){categorizedCount.textContent="—";} else categorizedCount.textContent=(catRes.count||0).toLocaleString();
+  }catch(e){console.warn("Stats:",e);totalCount.textContent="—";categorizedCount.textContent="—"}
+}
+
+function createQuery(){
+  let q=sb.from(activeTable).select("*");
+  if(search)q=q.ilike("name",`%${search}%`);
+  if(status==="done")q=q.not("category","is",null).neq("category","");
+  if(status==="pending")q=q.or("category.is.null,category.eq.");
+  return q;
+}
+
+async function loadProducts(reset=false){
+  if(loading&&!reset)return;
+  const token=requestToken;
+  if(reset){currentPage=0;hasMore=true;products=[];selectedIds.clear();productGrid.innerHTML="";emptyState.style.display="none";updateLoadedUI();showMainLoading(true)}
+  if(!hasMore){showMainLoading(false);return}
+  loading=true;
+  if(!reset)moreWrap.innerHTML=`<span class="spinner"></span>Loading more...`;
+  const from=currentPage*PAGE_SIZE,to=from+PAGE_SIZE-1;
+  try{
+    let res=await createQuery().order("id",{ascending:true}).range(from,to);
+    if(token!==requestToken)return;
+    // Some product tables have a slightly different schema. Retry safely instead of blocking the whole table.
+    if(res.error && status!=="all" && /category/i.test(res.error.message||"")){
+      status="all";statusFilter.value="all";
+      let q=sb.from(activeTable).select("*");
+      if(search)q=q.ilike("name",`%${search}%`);
+      res=await q.order("id",{ascending:true}).range(from,to);
     }
-  );
-
-  dropdownItems.forEach(item => {
-
-    const navLink =
-      item.querySelector(".nav-link");
-
-    navLink.addEventListener(
-      "click",
-      function(e){
-
-        if(window.innerWidth <= 1000){
-
-          e.preventDefault();
-
-          dropdownItems.forEach(other => {
-
-            if(other !== item){
-              other.classList.remove("open");
-            }
-
-          });
-
-          item.classList.toggle("open");
-
-        }
-
-      }
-    );
-
-  });
-
-  window.addEventListener(
-    "resize",
-    () => {
-
-      if(window.innerWidth > 1000){
-
-        navMenu.classList.remove("active");
-
-        dropdownItems.forEach(item => {
-          item.classList.remove("open");
-        });
-
-      }
-
+    // Cakes / Cafe or future tables may not support ordering by id in the same way.
+    if(res.error && /id|order/i.test(res.error.message||"")){
+      let q=sb.from(activeTable).select("*");
+      if(search)q=q.ilike("name",`%${search}%`);
+      res=await q.range(from,to);
     }
-  );
+    // Last fallback: load rows without filters so the table is still usable.
+    if(res.error){
+      res=await sb.from(activeTable).select("*").range(from,to);
+    }
+    if(res.error)throw res.error;
+    const rows=res.data||[];
+    products.push(...rows);
+    rows.forEach(addProductCard);
+    if(rows.length<PAGE_SIZE)hasMore=false;else currentPage++;
+    emptyState.style.display=products.length?"none":"block";
+    updateLoadedUI();
+    moreWrap.innerHTML=hasMore?`<span>Scroll to load more</span>`:`<span>All products loaded</span>`;
+  }catch(e){console.error(e);emptyState.style.display=products.length?"none":"block";toast(`Load failed: ${e.message||"Unknown error"}`,"error");moreWrap.innerHTML=""}
+  finally{if(token===requestToken){loading=false;showMainLoading(false)}}
+}
 
+function imageSlot(product,key,index){
+  const raw=fieldExists(product,key)?product[key]:null;
+  const url=getImageURL(raw);
+  return `<div class="image-slot" data-image-key="${key}">
+    <span class="img-tag">IMG ${index}</span>
+    ${url?`<img src="${esc(url)}" alt="${esc(productDisplayName(product)||"Product")}" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='grid'"><div class="img-empty" style="display:none"><i class="fa-regular fa-image"></i></div>`:`<div class="img-empty"><i class="fa-regular fa-image"></i></div>`}
+    <div class="img-actions"><button type="button" class="img-btn replace-img" data-key="${key}">Replace</button></div>
+    <input type="file" accept="image/*" class="file-input" data-key="${key}" hidden>
+  </div>`
+}
+
+function addProductCard(product){
+  const card=document.createElement("article");card.className="product-card";card.dataset.id=product.id;
+  const cat=product.category||"";
+  card.innerHTML=`<div class="card-top"><label class="check-wrap"><input type="checkbox" class="row-check"> Select</label><span class="pid">#${esc(product.id)}</span></div>
+  <div class="images">${imageSlot(product,"image1",1)}${imageSlot(product,"image2",2)}${imageSlot(product,"image3",3)}</div>
+  <div class="card-body"><div class="name" title="${esc(productDisplayName(product))}">${esc(productDisplayName(product))}</div>${cat?`<span class="category-badge">${esc(cat)}</span>`:""}
+  <div class="edit-grid">
+    <div class="field full"><label>Product name</label><input class="product-name-input" type="text" value="${esc(product.name||"")}" placeholder="Product name" ${fieldExists(product,"name")?"":"disabled"}></div>
+    <div class="field full"><label>Telugu name</label><input class="telugu-name-input" type="text" value="${esc(product.name_telugu||"")}" placeholder="తెలుగు పేరు" ${fieldExists(product,"name_telugu")?"":"disabled"}></div>
+    <div class="field"><label>Original price</label><input class="original" type="number" min="0" step="0.01" value="${esc(priceValue(product,"original_price"))}" placeholder="0"></div>
+    <div class="field"><label>Discount price</label><input class="discount" type="number" min="0" step="0.01" value="${esc(priceValue(product,"discount_price"))}" placeholder="0"></div>
+    <div class="field"><label>Quantity</label><input class="quantity" type="text" value="${esc(priceValue(product,"quantity"))}" placeholder="500 / 1 / 2"></div>
+    <div class="field"><label>Unit</label><input class="unit" type="text" value="${esc(priceValue(product,"unit"))}" placeholder="g / kg / ml / pcs"></div>
+    <div class="field full"><label>Category</label><select class="category">${categoryOptions(cat)}</select></div>
+  </div>
+  <div class="card-actions"><button type="button" class="save-btn">Save changes</button><button type="button" class="delete-btn" title="Delete"><i class="fa-solid fa-trash"></i></button></div></div>`;
+
+  const check=card.querySelector(".row-check");check.addEventListener("change",()=>{if(check.checked){selectedIds.add(product.id);card.classList.add("selected")}else{selectedIds.delete(product.id);card.classList.remove("selected")}updateSelectedUI()});
+  card.querySelectorAll(".replace-img").forEach(btn=>btn.addEventListener("click",()=>card.querySelector(`.file-input[data-key="${btn.dataset.key}"]`).click()));
+  card.querySelectorAll(".file-input").forEach(inp=>inp.addEventListener("change",()=>{if(inp.files?.[0])replaceImage(product,card,inp.dataset.key,inp.files[0])}));
+  card.querySelector(".save-btn").addEventListener("click",()=>saveProduct(product,card));
+  card.querySelector(".delete-btn").addEventListener("click",()=>openDelete(product,card));
+  productGrid.appendChild(card);
+}
+
+async function saveProduct(product,card){
+  const btn=card.querySelector(".save-btn");btn.disabled=true;btn.textContent="Saving...";
+  const payload={};
+  const name=card.querySelector(".product-name-input").value.trim(), teluguName=card.querySelector(".telugu-name-input").value.trim(), original=card.querySelector(".original").value.trim(), discount=card.querySelector(".discount").value.trim(), quantity=card.querySelector(".quantity").value.trim(), unit=card.querySelector(".unit").value.trim(), category=card.querySelector(".category").value;
+  if(fieldExists(product,"name"))payload.name=name||null;
+  if(fieldExists(product,"name_telugu"))payload.name_telugu=teluguName||null;
+  if(fieldExists(product,"original_price"))payload.original_price=original===""?null:Number(original);
+  if(fieldExists(product,"discount_price"))payload.discount_price=discount===""?null:Number(discount);
+  if(fieldExists(product,"quantity"))payload.quantity=quantity||null;
+  if(fieldExists(product,"unit"))payload.unit=unit||null;
+  if(fieldExists(product,"category"))payload.category=category||null;
+  if(!Object.keys(payload).length){toast("This table has no editable manager fields","warn");btn.disabled=false;btn.textContent="Save changes";return}
+  if(payload.original_price!=null&&payload.discount_price!=null&&payload.discount_price>payload.original_price){toast("Discount price cannot be above original price","error");btn.disabled=false;btn.textContent="Save changes";return}
+  try{const {data,error}=await sb.from(activeTable).update(payload).eq("id",product.id).select("*").single();if(error)throw error;Object.assign(product,data||payload);btn.classList.add("saved");btn.textContent="Saved";toast("Product updated");setTimeout(()=>{btn.classList.remove("saved");btn.textContent="Save changes"},1200);loadStats(requestToken)}catch(e){console.error(e);toast(`Save failed: ${e.message||"Unknown error"}`,"error");btn.textContent="Save changes"}finally{btn.disabled=false}
+}
+
+async function replaceImage(product,card,key,file){
+  if(!fieldExists(product,key)){toast(`${key} column is not available in ${activeTable}`,"error");return}
+  if(!file.type.startsWith("image/")){toast("Please choose an image file","error");return}
+  const old=product[key];const ext=(file.name.split(".").pop()||"jpg").toLowerCase().replace(/[^a-z0-9]/g,"")||"jpg";const path=`${activeTable}/${product.id}/${key}-${Date.now()}.${ext}`;
+  toast(`Uploading ${key}...`);
+  try{const up=await sb.storage.from(BUCKET).upload(path,file,{cacheControl:"3600",upsert:false});if(up.error)throw up.error;const {error}=await sb.from(activeTable).update({[key]:path}).eq("id",product.id);if(error){await sb.storage.from(BUCKET).remove([path]);throw error}product[key]=path;const oldPath=getStoragePath(old);if(oldPath&&oldPath!==path)sb.storage.from(BUCKET).remove([oldPath]).catch(()=>{});rerenderCard(product,card);toast(`${key} replaced`)}catch(e){console.error(e);toast(`Image replace failed: ${e.message||"Unknown error"}`,"error")}
+}
+
+function rerenderCard(product,oldCard){const idx=products.findIndex(p=>String(p.id)===String(product.id));if(idx>=0)products[idx]=product;const temp=document.createElement("div");const nextSibling=oldCard.nextSibling;oldCard.remove();addProductCard(product);const newCard=productGrid.lastElementChild;if(nextSibling)productGrid.insertBefore(newCard,nextSibling);if(selectedIds.has(product.id)){newCard.querySelector(".row-check").checked=true;newCard.classList.add("selected")}}
+
+function openDelete(product,card){deleteTarget={product,card,table:activeTable};$("modalName").textContent=productDisplayName(product);$("deleteModal").classList.add("show")}
+function closeDelete(){$("deleteModal").classList.remove("show");deleteTarget=null}
+$("cancelDelete").onclick=closeDelete;
+$("deleteModal").addEventListener("click",e=>{if(e.target===$("deleteModal"))closeDelete()});
+$("confirmDelete").onclick=async()=>{if(!deleteTarget)return;const {product,card,table}=deleteTarget;const btn=$("confirmDelete");btn.disabled=true;btn.textContent="Deleting...";try{const {error}=await sb.from(table).delete().eq("id",product.id);if(error)throw error;const paths=["image1","image2","image3"].map(k=>getStoragePath(product[k])).filter(Boolean);if(paths.length)sb.storage.from(BUCKET).remove(paths).catch(()=>{});products=products.filter(p=>String(p.id)!==String(product.id));selectedIds.delete(product.id);card.remove();updateLoadedUI();loadStats(requestToken);closeDelete();toast("Product deleted")}catch(e){console.error(e);toast(`Delete failed: ${e.message||"Unknown error"}`,"error")}finally{btn.disabled=false;btn.textContent="Delete product"}};
+
+async function applyBulk(){const category=bulkCategory.value;if(!selectedIds.size||!category)return;bulkApply.disabled=true;bulkApply.textContent="Applying...";try{const ids=[...selectedIds];const {error}=await sb.from(activeTable).update({category}).in("id",ids);if(error)throw error;products.forEach(p=>{if(selectedIds.has(p.id))p.category=category});await reloadPreservePosition();toast(`Category applied to ${ids.length} products`)}catch(e){console.error(e);toast(`Bulk update failed: ${e.message||"Unknown error"}`,"error")}finally{bulkApply.textContent="Apply to selected";updateSelectedUI()}}
+bulkApply.onclick=applyBulk;bulkCategory.onchange=updateSelectedUI;
+
+async function reloadPreservePosition(){const y=window.scrollY;requestToken++;await Promise.all([loadStats(requestToken),loadProducts(true)]);requestAnimationFrame(()=>window.scrollTo({top:y,behavior:"auto"}))}
+
+async function switchTable(name){if(name===activeTable||!PRODUCT_TABLES.some(t=>t.name===name))return;const y=window.scrollY;activeTable=name;requestToken++;search="";status="all";searchInput.value="";statusFilter.value="all";bulkCategory.value="";selectedIds.clear();buildSidebar();const meta=tableMeta();activeTableLabel.textContent=meta.label;productsTitle.textContent=meta.label;showingText.textContent=`Loading ${meta.label}...`;window.scrollTo({top:y,behavior:"auto"});await Promise.all([loadStats(requestToken),loadProducts(true)]);requestAnimationFrame(()=>window.scrollTo({top:y,behavior:"auto"}))}
+
+tableList.addEventListener("click",e=>{const btn=e.target.closest(".table-btn");if(btn){switchTable(btn.dataset.table);closeMobileNav()}});
+searchInput.addEventListener("input",()=>{clearTimeout(searchTimer);searchTimer=setTimeout(()=>{search=searchInput.value.trim();requestToken++;loadProducts(true)},350)});
+statusFilter.addEventListener("change",()=>{status=statusFilter.value;requestToken++;loadProducts(true)});
+
+
+const mobileMenuBtn=$("mobileMenuBtn"), mobileOverlay=$("mobileOverlay");
+function closeMobileNav(){document.body.classList.remove("mobile-nav-open")}
+if(mobileMenuBtn)mobileMenuBtn.addEventListener("click",()=>document.body.classList.toggle("mobile-nav-open"));
+if(mobileOverlay)mobileOverlay.addEventListener("click",closeMobileNav);
+window.addEventListener("resize",()=>{if(window.innerWidth>920)closeMobileNav()});
+
+const observer=new IntersectionObserver(entries=>{if(entries[0].isIntersecting&&hasMore&&!loading)loadProducts(false)},{rootMargin:"300px"});observer.observe(moreWrap);
+
+buildSidebar();buildCategories();loadStats(requestToken);loadProducts(true);
 </script>
-
 </body>
 </html>
